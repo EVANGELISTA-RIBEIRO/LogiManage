@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "logimanage"
+version = "0.1.0a1"
+description = ""
+authors = ["EVANGELISTA-RIBEIRO <joaovictor.setembro@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "logimanage" }]
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+django = "^5.1.7"
+pytest = "^8.3.5"
+python-docx = "^1.1.2"
+pymongo = "^4.11.2"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
