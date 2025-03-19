@@ -14,7 +14,7 @@ class RegistroForm(forms.ModelForm):
     email = forms.EmailField(
         widget = forms.EmailInput(attrs={'class': 'input-field'}),
         label = 'E-mail',
-        required = True
+        required = True,
     )
 
     class Meta:
@@ -61,6 +61,12 @@ class RegistroForm(forms.ModelForm):
         username = self.cleaned_data.get('username')
         return username.strip().replace(' ', '_')
     
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Este endereço de e-mail já está em uso!')
+        return email
+
 class LoginForm(forms.Form):
     username = forms.CharField(
         widget = forms.TextInput(attrs={'class': 'input-field'}),
