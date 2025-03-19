@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    line-height: normal;
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb; /* Fundo da página */
+  }
+  
+  .registrar {
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    text-align: left;
+    font-size: 47px;
+    color: #009ed8;
+  }
+  
+  .icon1 {
+    width: 214px;
+    border-radius: 34.24px;
+    height: 214px;
+  }
+  
+  .logimanage {
+    font-weight: 600;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  .content {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 400px; /* Largura do quadrado */
+    background-color: #fff;
+    padding: 40px; /* Espaçamento interno */
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ajuste para os inputs */
+  .input-field input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #667085;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 7.04px;
+  }
+
+  .text-and-supporting-text {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: flex-start;
+    gap: 12px;
+    text-align: center; /* Centraliza o texto */
+  }
+  
+  .text {
+    font-size: 30px;
+    font-weight: 600;
+    color: #2b2f38;
+  }
+  
+  .supporting-text {
+    font-size: 16px;
+    color: #667085;
+  }
+  
+  .input-field {
+    width: 100%;
+    margin-bottom: 16px; /* Espaçamento entre os campos */
+  }
+  
+  .input-field label {
+    display: block;
+    margin-bottom: 0px; /* Espaçamento entre o texto e o input */
+    font-size: 14px;
+    color: #48505e;
+  }
+  
+  .input-field input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #667085;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    height: 40px; /* Adicionando uma altura fixa */
+    box-sizing: border-box;
+}
+  
+  .hint-text {
+    font-size: 12px;
+    color: #667085;
+    margin-top: 4px;
+  }
+  
+  .button-base {
+    width: 100%;
+    padding: 10px 18px;
+    background-color: #1366d9;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .button-base1 {
+    background-color: transparent;
+    color: #1366d9;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #667085;
+  }
