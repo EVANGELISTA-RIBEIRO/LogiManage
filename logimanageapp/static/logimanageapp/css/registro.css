@@ -152,3 +152,10 @@ body {
     font-size: 14px;
     color: #667085;
   }
+
+  .error {
+    color: #d9534f;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
