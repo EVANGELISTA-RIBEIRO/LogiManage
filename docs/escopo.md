@@ -75,16 +75,17 @@ A implementação do **LogiManage** trará melhorias significativas na gestão d
 - CSS
 ### 4.2. Frameworks e bibliotecas
 - Django
-- PyMongo
-- MongoEngine
 - python-docx
 - pdf2docx
 - pytest
+- pytest-django
 - ruff
 ### 4.3. Banco de dados
-- MongoDBCompass
+- SQLite3
 ### 4.5. Ferramentas auxiliares
 - Figma
+### 4.6 Gerenciado de dependências
+- Poetry
 
 ## 5. Arquitetura do Sistema (A discutir)
 - Diagrama de alto nível
