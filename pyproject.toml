@@ -13,6 +13,10 @@ pytest = "^8.3.5"
 python-docx = "^1.1.2"
 pymongo = "^4.11.2"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-django = "^4.10.0"
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
