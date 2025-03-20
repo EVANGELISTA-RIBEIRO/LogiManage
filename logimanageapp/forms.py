@@ -1,10 +1,11 @@
 from django  import forms
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator
 
 class RegistroForm(forms.ModelForm):
     senha = forms.CharField(
             widget = forms.PasswordInput(attrs={'class': 'input-field'}),
-            min_length = 8,
+            validators=[MinLengthValidator(8, message='Sua senha deve ter no mínimo 8 caracteres!')],
             label ='Senha'
     )
     confirmar_senha = forms.CharField(
