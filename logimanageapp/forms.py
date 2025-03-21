@@ -69,9 +69,10 @@ class RegistroForm(forms.ModelForm):
         return email
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
-        widget = forms.TextInput(attrs={'class': 'input-field'}),
-        label='Nome de Usuário'
+    email = forms.EmailField(
+        widget = forms.EmailInput(attrs={'class': 'input-field'}),
+        label = 'E-mail',
+        required = True,
     )
     password = forms.CharField(
         widget = forms.PasswordInput(attrs={'class': 'input-field'}),
