@@ -10,7 +10,7 @@ class RegistroForm(forms.ModelForm):
     )
     confirmar_senha = forms.CharField(
         widget = forms.PasswordInput(attrs={'class': 'input-field'}),
-        label ='Confirme sua Senha'
+        label ='Confirmar Senha'
     )
     email = forms.EmailField(
         widget = forms.EmailInput(attrs={'class': 'input-field'}),
@@ -26,7 +26,7 @@ class RegistroForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'input-field'}),
         }
         labels = {
-            'username': 'Nome de Usuário',
+            'username': 'Nome',
             'email': 'E-mail',
         }
         help_texts = {
