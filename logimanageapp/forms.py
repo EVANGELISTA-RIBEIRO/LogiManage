@@ -10,7 +10,7 @@ class RegistroForm(forms.ModelForm):
     )
     confirmar_senha = forms.CharField(
         widget = forms.PasswordInput(attrs={'class': 'input-field'}),
-        label ='Confirme sua Senha'
+        label ='Confirmar Senha'
     )
     email = forms.EmailField(
         widget = forms.EmailInput(attrs={'class': 'input-field'}),
@@ -26,7 +26,7 @@ class RegistroForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'input-field'}),
         }
         labels = {
-            'username': 'Nome de Usuário',
+            'username': 'Nome',
             'email': 'E-mail',
         }
         help_texts = {
@@ -37,7 +37,6 @@ class RegistroForm(forms.ModelForm):
                 'required': 'Por favor informe um nome de usuário!',
                 'unique': 'Este nome de usuário já está em uso!',
                 'max_length': 'O nome de usuário deve conter apenas letras, números e os caracteres @/./+/-/_ e deve ter no mínimo 5 caracteres!',
-                'invalid': 'O nome de usuário deve conter apenas letras, números e os caracteres @/./+/-/_ e deve ter no mínimo 5 caracteres!',
             },
             'email': {
                 'required': 'Por favor informe um endereço de e-mail!',
@@ -70,10 +69,18 @@ class RegistroForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        widget = forms.TextInput(attrs={'class': 'input-field'}),
-        label='Nome de Usuário'
+        widget=forms.TextInput(attrs={'class': 'input-field'}),
+        label="Nome de usuário",
+        required=True,
+        error_messages={
+            'required': 'Por favor informe seu nome de usuário!',
+        }
     )
     password = forms.CharField(
-        widget = forms.PasswordInput(attrs={'class': 'input-field'}),
-        label='Senha'
+        widget=forms.PasswordInput(attrs={'class': 'input-field'}),
+        label="Senha",
+        validators=[MinLengthValidator(8, message='A senha deve ter no mínimo 8 caracteres!')],
+        error_messages={
+            'required': 'Por favor informe sua senha!',
+        }
     )
