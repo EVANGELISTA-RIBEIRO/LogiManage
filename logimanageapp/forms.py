@@ -64,7 +64,7 @@ class RegistroForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data.get('username')
         return username.strip().replace(' ', '_')
-    
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
