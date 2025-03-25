@@ -4,18 +4,22 @@ from django.core.validators import MinLengthValidator
 
 class RegistroForm(forms.ModelForm):
     senha = forms.CharField(
-            widget = forms.PasswordInput(attrs={'class': 'input-field'}),
+            widget = forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Insira sua senha'}),
             validators=[MinLengthValidator(8, message='Sua senha deve ter no mínimo 8 caracteres!')],
             label ='Senha'
     )
     confirmar_senha = forms.CharField(
-        widget = forms.PasswordInput(attrs={'class': 'input-field'}),
+        widget = forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Confirme sua senha'}),
         label ='Confirmar Senha'
     )
     email = forms.EmailField(
-        widget = forms.EmailInput(attrs={'class': 'input-field'}),
+        widget = forms.EmailInput(attrs={'class': 'input-field', 'placeholder': 'Insira seu e-mail'}),
         label = 'E-mail',
         required = True,
+    )
+    username = forms.CharField(
+        widget = forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Insira seu nome'}),
+        label = 'Nome',
     )
 
     class Meta:
@@ -69,15 +73,15 @@ class RegistroForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input-field'}),
-        label="Nome de usuário",
+        widget=forms.TextInput(attrs={'class': 'input-field','placeholder': 'Insira seu nome'}),
+        label="Nome",
         required=True,
         error_messages={
             'required': 'Por favor informe seu nome de usuário!',
         }
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'input-field'}),
+        widget=forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': '••••••••'}),
         label="Senha",
         validators=[MinLengthValidator(8, message='A senha deve ter no mínimo 8 caracteres!')],
         error_messages={
