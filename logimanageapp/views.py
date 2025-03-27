@@ -3,7 +3,13 @@ from django.contrib.auth import login, authenticate
 from logimanageapp.forms import LoginForm, RegistroForm
 
 def registro_view(request):
-    form = RegistroForm(initial={"username": "", "email": "", "senha": "", "confirmar_senha": ""})
+    form = RegistroForm(
+        initial={
+            "username": "",
+            "email": "",
+            "senha": "",
+            "confirmar_senha": ""
+        })
     return render(request, "logimanageapp/views/registro.html", {"form": form})
 
 def registrar_usuario(request):
@@ -21,7 +27,11 @@ def registrar_usuario(request):
     return render(request, "logimanageapp/views/registro.html", {"form": form})
 
 def login_view(request):
-    form = LoginForm(initial={"email": "", "password": ""})
+    form = LoginForm(
+        initial={
+            "email": "",
+            "password": ""
+        })
     return render(request, "logimanageapp/views/login.html", {"form": form})
 
 def logar_usuario(request):

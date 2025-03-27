@@ -1,6 +1,5 @@
 import pytest
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from logimanageapp.forms import RegistroForm, LoginForm
 from django import forms
 
