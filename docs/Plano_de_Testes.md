@@ -1,30 +1,28 @@
-# Plano de Testes - LogiManage
-
-## 1. Plano de Teste
-### 1.1. Plano de Teste
+## 1. Plano de Testes - LogiManage
+### 1.1 Plano de Teste
 Sistema de Gerenciamento de Transportes
-### 1.2. Objetivo
+### 1.2 Objetivo
 Garantir que o sistema permita um cadastro e login seguro.
-### 1.3. Escopo
+### 1.3 Escopo
 Testar a funcionalidade de cadastro e login com credenciais válidas e inválidas.
-### 1.4. Estratégia
+### 1.4 Estratégia
 Testes manuais e automatizados usando Pytest e validadores Django forms.
-### 1.5. Recursos
+### 1.5 Recursos
 Banco de dados SQLite3, VSCode, Pytest, Python, Django.
-### 1.6. Riscos 
-- Banco de Dados Não Configurado ou Inacessível
+### 1.6 Riscos 
+#### 1.6.1 Banco de Dados Não Configurado ou Inacessível
 Como os testes usam @pytest.mark.django_db, é necessário que o banco de dados esteja acessível. Se o banco não estiver configurado corretamente, os testes falharão.
-- Execução de Testes em um Banco de Dados de Produção
+#### 1.6.2 Execução de Testes em um Banco de Dados de Produção
 Se pytest for executado em um banco de produção por engano, pode causar perda de dados. Django normalmente bloqueia esse comportamento, mas é um risco se settings.DATABASES não estiver bem configurado.
-- Migrações Não Aplicadas
+#### 1.6.3 Migrações Não Aplicadas
 Se as migrações do Django não estiverem atualizadas (python manage.py migrate), os testes podem falhar ao tentar acessar modelos que não existem no esquema do banco de dados.
-- Testes Paralelos e Concorrência
+#### 1.6.4 Testes Paralelos e Concorrência
 Se os testes forem executados simultaneamente (com pytest-xdist por exemplo), podem surgir conflitos de escrita no banco de testes.
-- Dependência de Configurações Externas
+#### 1.6.5 Dependência de Configurações Externas
 Se alguma configuração necessária para os formulários depender de arquivos externos (settings.py, .env), isso pode impedir a execução dos testes.
-- Mensagens de Erro e Localização
+#### 1.6.6 Mensagens de Erro e Localização
 Se o Django estiver configurado para usar tradução dinâmica (gettext), as mensagens de erro podem variar dependendo do idioma, fazendo com que os testes falhem.
-### 1.7. Cronograma
+### 1.7 Cronograma
 20/03/2025 - 27/03/2025
 ## 2. Casos de Teste
 ### **ID: CT-001**  
