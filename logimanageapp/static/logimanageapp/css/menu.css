@@ -1,0 +1,45 @@
+.list-menu {
+    width: 100%;
+    padding: 8px 0;
+}
+
+.list-menu1 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.list-menu2 {
+    border-radius: 8px;
+    padding: 8px 0;
+    transition: background-color 0.3s ease;
+}
+
+.list-menu2:hover {
+    background-color: #f0f1f3;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+}
+
+.home-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.text {
+    line-height: 24px;
+    font-weight: 500;
+    color: #1e1e1e;
+    white-space: nowrap;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
