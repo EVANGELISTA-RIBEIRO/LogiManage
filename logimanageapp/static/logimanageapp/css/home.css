@@ -34,13 +34,6 @@
 }
 
 @media (max-width: 992px) {
-    .side-bar {
-        width: 70px;
-        padding: 10px;
-    }
-    .logo .logimanage {
-        display: none;
-    }
     .top-bar, .top-bar1 {
         left: 70px;
         width: calc(100% - 70px);
@@ -97,9 +90,6 @@
 }
 
 @media (max-width: 576px) {
-    .side-bar {
-        width: 50px;
-    }
     .top-bar, .top-bar1 {
         left: 50px;
         width: calc(100% - 50px);
@@ -121,92 +111,6 @@
 body {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-}
-
-/* Sidebar */
-.side-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    border-radius: 0px 8px 8px 0px;
-    background-color: #fff;
-    border-right: 1px solid #f0f1f3;
-    width: 280px;
-    padding: 24px 24px 32px;
-    z-index: 1000;
-    transition: width 0.3s ease;
-}
-
-.top {
-    width: 100%;
-    padding: 4px 12px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.icon {
-    width: 49px;
-    border-radius: 7.84px;
-    height: 49px;
-}
-
-.logimanage {
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: 600;
-    color: #009ed8;
-    white-space: nowrap;
-}
-
-.list-menu {
-    width: 100%;
-    padding: 8px 0;
-}
-
-.list-menu1 {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.list-menu2 {
-    border-radius: 8px;
-    padding: 8px 0;
-    transition: background-color 0.3s ease;
-}
-
-.list-menu2:hover {
-    background-color: #f0f1f3;
-}
-
-.content {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0 16px;
-}
-
-.home-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.text {
-    line-height: 24px;
-    font-weight: 500;
-    color: #1e1e1e;
-    white-space: nowrap;
-}
-
-.menu-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
 }
 
 /* Top bar */
@@ -297,6 +201,7 @@ body {
     line-height: 47.79px;
     background: linear-gradient(90.79deg, #009ed8, #0acf83);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     width: 100%;
     max-width: 742px;
@@ -383,146 +288,4 @@ body {
     height: auto;
     margin: 10px 0;
     z-index: 1;
-}
-
-/* Media Queries */
-@media (max-width: 1200px) {
-    .header-inicial {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .logimanage-gesto-eficiente, 
-    .bem-vindo-ao-logimanage {
-        max-width: 100%;
-        text-align: center;
-    }
-    
-    .figuras-1 {
-        margin: 20px auto;
-    }
-}
-
-@media (max-width: 992px) {
-    .side-bar {
-        width: 80px;
-        padding: 20px 10px;
-    }
-    
-    .logimanage {
-        display: none;
-    }
-    
-    .top-bar {
-        left: 80px;
-        width: calc(100% - 80px);
-    }
-    
-    .search-bar-wrapper {
-        left: 100px;
-        width: calc(100% - 100px);
-    }
-    
-    .incio {
-        padding-left: 80px;
-    }
-    
-    .text {
-        display: none;
-    }
-    
-    .content {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .search-bar {
-        max-width: 100%;
-    }
-    
-    .cards-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .acompanhe-e-gerencie, 
-    .acompanhe-e-gerencie1, 
-    .formulrios {
-        width: 100%;
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .side-bar {
-        width: 60px;
-    }
-    
-    .top-bar {
-        left: 60px;
-        width: calc(100% - 60px);
-    }
-    
-    .search-bar-wrapper {
-        left: 70px;
-        width: calc(100% - 70px);
-        padding: 0 15px;
-    }
-    
-    .incio {
-        padding-left: 60px;
-    }
-    
-    .header-inicial {
-        margin: 10px;
-        padding: 20px;
-    }
-    
-    .logimanage-gesto-eficiente {
-        font-size: 30px;
-        line-height: 36px;
-    }
-}
-
-/* Card de Formulários - Versão Final Ajustada */
-.formulrios {
-    flex: 1;
-    min-width: 300px;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 30px;
-    box-shadow: 0px 5px 10.1px -3px rgba(0, 0, 0, 0.25);
-    position: relative;
-    overflow: hidden;
-    height: 249px; /* Mesma altura dos outros */
-}
-
-.formulrios .h3-feature-title3 {
-    font-size: 22px;
-    line-height: 25px;
-    color: #555;
-    margin-bottom: 15px;
-    position: relative;
-    text-align: left; /* Texto alinhado à esquerda */
-}
-
-.formulrios .figuras-2 {
-    width: 150px; /* Aumentei de 117px para 140px */
-    height: auto;
-    position: absolute;
-    left: 0px;  /* Reduzi de 30px para 20px (mais à esquerda) */
-    bottom: 20px; /* Ajuste proporcional */
-    z-index: 2;
-}
-
-/* Ajuste para mobile */
-@media (max-width: 768px) {
-    .formulrios .figuras-2 {
-        width: 100px; /* Ajuste proporcional para mobile */
-        position: relative;
-        left: 0; /* Colado à esquerda no mobile */
-        margin-top: 15px;
-    }
 }
