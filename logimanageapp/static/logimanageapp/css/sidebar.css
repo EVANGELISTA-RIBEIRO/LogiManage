@@ -1,0 +1,38 @@
+.side-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    border-radius: 0px 8px 8px 0px;
+    background-color: #fff;
+    border-right: 1px solid #f0f1f3;
+    width: 280px;
+    padding: 24px 24px 32px;
+    z-index: 1000;
+    transition: width 0.3s ease;
+}
+
+.top {
+    width: 100%;
+    padding: 4px 12px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon {
+    width: 49px;
+    border-radius: 7.84px;
+    height: 49px;
+}
+
+.logimanage {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #009ed8;
+    white-space: nowrap;
+}
