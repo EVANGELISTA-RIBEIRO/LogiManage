@@ -52,3 +52,6 @@ def logar_usuario(request):
         form = LoginForm()
 
     return render(request, "logimanageapp/views/login.html", {"form": form})
+
+def home_view(request):
+    return render(request, "logimanageapp/views/home.html")
