@@ -9,7 +9,7 @@ class RegistroForm(forms.ModelForm):
             label ='Senha'
     )
     confirmar_senha = forms.CharField(
-        widget = forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Confirme sua senha'}),
+        widget = forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Insira a senha novamente'}),
         label ='Confirmar Senha'
     )
     email = forms.EmailField(
