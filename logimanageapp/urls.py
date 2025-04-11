@@ -8,9 +8,9 @@ from logimanageapp.views import (
 
 urlpatterns = [
     # Página de login
-    path('login/', login_view, name='login'),
+    path('', login_view, name='login'),
     # Página registro
-    path('', registro_view, name='registro'),
+    path('registro/', registro_view, name='registro'),
     # Registra o usuário
     path("registrar_usuario/", registrar_usuario, name="registrar_usuario"),
     # Página home
