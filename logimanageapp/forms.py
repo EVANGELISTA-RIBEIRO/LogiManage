@@ -73,7 +73,7 @@ class RegistroForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input-field','placeholder': 'Insira seu nome'}),
+        widget=forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Insira seu nome'}),
         label="Nome",
         required=True,
         error_messages={
@@ -88,3 +88,7 @@ class LoginForm(forms.Form):
             'required': 'Por favor informe sua senha!',
         }
     )
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        return username.strip().replace(' ', '_')
