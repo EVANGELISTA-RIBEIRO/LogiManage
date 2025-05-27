@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiManage - Requisição</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/requisicao.css' %}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <img class="logo-icon" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg' %}" alt="Logo LogiManage">
+                <div class="logo-text">LogiManage</div>
+            </div>
+            
+            <nav class="menu">
+                <a href="inicio.html" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-inicio-menu-preto.svg' %}" alt="Início">
+                    <span>Início</span>
+                </a>
+                <a href="painel.html" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-painel-menu.svg' %}" alt="Painel">
+                    <span>Painel De Controle</span>
+                </a>
+                <a href="requisicao.html" class="menu-item active">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-requisicao-menu-azul.svg' %}" alt="Requisição">
+                    <span>Requisição</span>
+                </a>
+                <a href="formularios.html" class="menu-item">
+                    <img class="menu-icon" src="{% static "logimanageapp/imgs/logo-formulario-menu.svg" %}" alt="Formulários">
+                    <span>Formulários</span>
+                </a>
+                <a href="perfil.html" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-perfil-menu.svg' %}" alt="Perfil">
+                    <span>Perfil</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Requisição de Transporte</h1>
+                <button class="primary-button">
+                    Adicionar Equipamento
+                </button>
+            </div>
+
+            <div class="transport-table-container">
+                <div class="table-scroll">
+                    <table class="transport-table">
+                        <thead>
+                            <tr>
+                                <th>Nº Equi.</th>
+                                <th>Nome do Equipamento</th>
+                                <th>Cod. (SAP)</th>
+                                <th>Comprimento</th>
+                                <th>Largura</th>
+                                <th>Altura</th>
+                                <th>Largura2</th>
+                                <th>Altura2</th>
+                                <th>Peso</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Equipamento A</td>
+                                <td>SAP001</td>
+                                <td>2,5m</td>
+                                <td>1,2m</td>
+                                <td>1,8m</td>
+                                <td>1,1m</td>
+                                <td>1,7m</td>
+                                <td>150kg</td>
+                                <td>R$ 5.000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Equipamento B</td>
+                                <td>SAP002</td>
+                                <td>3,0m</td>
+                                <td>1,5m</td>
+                                <td>2,0m</td>
+                                <td>1,4m</td>
+                                <td>1,9m</td>
+                                <td>200kg</td>
+                                <td>R$ 7.500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-footer">
+                    <button class="secondary-button">
+                        Anterior
+                    </button>
+                    <span class="page-info">Página 1</span>
+                    <button class="secondary-button">
+                        Próximo
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
