@@ -55,3 +55,6 @@ def logar_usuario(request):
 
 def home_view(request):
     return render(request, "logimanageapp/views/home.html")
+
+def requisicao_view(request):
+    return render(request, "logimanageapp/views/requisicao.html")
