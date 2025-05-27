@@ -1,49 +1,87 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiManage - Início</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="{% static 'logimanageapp/css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}">
-    <link rel="stylesheet" href="{% static 'logimanageapp/css/menu.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
 </head>
 <body>
-    <div class="incio">
-        {% include 'logimanageapp/includes/sidebar.html' %}
-        <div class="top-bar"></div>
-        <div class="search-bar-wrapper">
-            <div class="search-bar">
-                <img class="home-icon" alt="" src={% static "logimanageapp/imgs/search.png" %}>
-                <input type="text" class="pesquisar-input" placeholder="Pesquisar">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <img class="logo-icon" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg' %}" alt="Logo LogiManage">
+                <div class="logo-text">LogiManage</div>
             </div>
+            
+            <nav class="menu">
+                <a href="#" class="menu-item active">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-inicio-menu.svg' %}" alt="Início">
+                    <span>Início</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-painel-menu.svg' %}" alt="Painel">
+                    <span>Painel De Controle</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-requisicao-menu.svg' %}" alt="Requisição">
+                    <span>Requisição</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-formulario-menu.svg' %}" alt="Formulários">
+                    <span>Formulários</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-perfil-menu.svg' %}" alt="Perfil">
+                    <span>Perfil</span>
+                </a>
+            </nav>
         </div>
-        <div class="header-inicial">
-            <div class="header-inicial-child"></div>
-            <b class="logimanage-gesto-eficiente">LogiManage: Gestão Eficiente de Transportes</b>
-            <div class="bem-vindo-ao-logimanage">Bem-vindo ao LogiManage - O sistema completo para gerenciar com eficiência seus transportes e equipamentos, trazendo mais organização e controle para sua logística.</div>
-            <img class="figuras-1" alt="" src={% static "logimanageapp/imgs/Figuras1.png" %}>
-        </div>
-        <div class="cards-container">
-            <div class="acompanhe-e-gerencie">
-                <div class="acompanhe-e-gerencie-child"></div>
-                <b class="companhe-e-gerencie">Acompanhe e gerencie todos os transportes em andamento.</b>
-                <img class="truck-8-1" alt="" src={% static "logimanageapp/imgs/truck1.png" %}>
-            </div>
-            <div class="acompanhe-e-gerencie1">
-                <div class="acompanhe-e-gerencie2">
-                    <div class="acompanhe-e-gerencie-item"></div>
-                    <b class="companhe-e-gerencie1">Gerenciamento de Equipamentos.</b>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">LogiManage: Gestão Eficiente de Transportes</h1>
+                    <p class="hero-description">Bem-vindo ao LogiManage - O sistema completo para gerenciar com eficiência seus transportes e equipamentos, trazendo mais organização e controle para sua logística.</p>
                 </div>
-                <img class="insurance-3-1" alt="" src={% static "logimanageapp/imgs/insurance1.png" %}>
+                <div class="hero-image">
+                    <img src="{% static 'logimanageapp/imgs/homens-trabalhando.svg' %}" alt="Ilustração LogiManage">
+                </div>
+            </section>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="{% static 'logimanageapp/imgs/img-card2.svg' %}" alt="Transportes">
+                    </div>
+                    <h3 class="feature-title">Acompanhe e gerencie todos os transportes em andamento.</h3>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card highlight">
+                    <div class="feature-icon">
+                        <img src="{% static 'logimanageapp/imgs/img-card1.svg' %}" alt="Equipamentos">
+                    </div>
+                    <h3 class="feature-title">Gerenciamento de Equipamentos.</h3>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="{% static 'logimanageapp/imgs/img-card3.svg' %}" alt="Formulários">
+                    </div>
+                    <h3 class="feature-title">Visualize formulários detalhados sobre transportes e equipamentos.</h3>
+                </div>
             </div>
-            <div class="formulrios">
-                <b class="h3-feature-title3">Visualize formulários sobre transportes e equipamentos.</b>
-                <img class="figuras-2" alt="" src={% static "logimanageapp/imgs/Figuras2.png" %}>
-            </div>
-        </div>
+        </main>
     </div>
 </body>
 </html>
