@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiManage - Perfil</title>
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/perfil.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="painel-de-controle">
+        <!-- Sidebar -->
+        <div class="side-bar">
+            <div class="top-parent">
+                <div class="top">
+                    <div class="logo">
+                        <img class="icon" alt="Logo" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg' %}">
+                        <div class="logimanage">LogiManage</div>
+                    </div>
+                </div>
+                <div class="list-menu">
+                    <div class="list-menu1">
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Início" src="{% static 'logimanageapp/imgs/logo-inicio-menu-preto.svg' %}">
+                                <div class="text">Início</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Painel" src="{% static 'logimanageapp/imgs/logo-painel-menu.svg'%}">
+                                <div class="text">Painel De Controle</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Requisição" src="{% static 'logimanageapp/imgs/logo-requisicao-menu.svg' %}">
+                                <div class="text">Requisição</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Formulários" src="{% static 'logimanageapp/imgs/logo-formulario-menu.svg' %}">
+                                <div class="text">Formulários</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu5 active">
+                            <div class="content">
+                                <img class="home-icon" alt="Perfil" src="{% static 'logimanageapp/imgs/logo-perfil-menu-azul.svg' %}">
+                                <div class="text">Perfil</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h1>Meu Perfil</h1>
+                    <div class="date-display">
+                        <!-- Data atualizada manualmente -->
+                        <time datetime="2024-03-28">Terça-feira, 27 de Maio de 2025</time>
+                    </div>
+                </div>
+                
+                <div class="profile-content">
+                    <!-- Seção de Foto do Perfil -->
+                    <div class="profile-picture-section">
+                        <div class="photo-container">
+                            <img src="{% static 'logimanageapp/imgs/imagem-usuario.png' %}" alt="Foto do usuário" class="profile-photo">
+                            <div class="photo-upload">
+                                <label for="photoInput" class="upload-button">
+                                    <i class="fas fa-camera"></i> Alterar Foto
+                                </label>
+                                <input type="file" id="photoInput" accept="image/*" class="file-input">
+                            </div>
+                        </div>
+                        
+                        <div class="user-info">
+                            <h2>Leandro Bezerra</h2>
+                            <p>leandrob@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Formulário de Perfil -->
+                    <form class="profile-form">
+                        <div class="form-group">
+                            <label for="fullName">Nome Completo</label>
+                            <input type="text" id="fullName" value="Leandro Bezerra">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Gênero</label>
+                            <select id="gender">
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                                <option value="prefiro-nao-dizer">Prefiro não dizer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="language">Língua</label>
+                            <select id="language">
+                                <option value="portugues">Português</option>
+                                <option value="ingles">Inglês</option>
+                                <option value="espanhol">Espanhol</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country">País</label>
+                            <select id="country">
+                                <option value="brasil">Brasil</option>
+                                <option value="portugal">Portugal</option>
+                                <option value="eua">Estados Unidos</option>
+                                <option value="espanha">Espanha</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="save-button">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
