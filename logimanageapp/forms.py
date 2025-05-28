@@ -92,3 +92,73 @@ class LoginForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data.get('username')
         return username.strip().replace(' ', '_')
+
+class RequisicaoForm(forms.Form):
+    # --- Dados sobre o Equipamento ---
+    PECULIARIDADES_CHOICES = [
+        ('fragil', 'Frágil'),
+        ('liquido', 'Líquido'),
+        ('refrigerado', 'Refrigerado'),
+        ('toxico', 'Tóxico'),
+    ]
+
+    peculiaridades = forms.MultipleChoiceField(
+        choices=PECULIARIDADES_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        label="A carga possui alguma peculiaridade?",
+        required=False
+    )
+
+    outra_peculiaridade = forms.CharField(
+        label="Outro",
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Especifique'})
+    )
+
+    embalada = forms.ChoiceField(
+        choices=[('sim', 'Sim'), ('nao', 'Não')],
+        widget=forms.RadioSelect,
+        label="A carga a ser transportada já está embalada?"
+    )
+
+    necessita_embalagem = forms.ChoiceField(
+        choices=[('sim', 'Sim'), ('nao', 'Não')],
+        widget=forms.RadioSelect,
+        label="Será necessário algum tipo de embalagem?"
+    )
+
+    tipo_embalagem = forms.CharField(
+        label="Tipo de Embalagem",
+        required=False
+    )
+
+    urgente = forms.ChoiceField(
+        choices=[('sim', 'Sim'), ('nao', 'Não')],
+        widget=forms.RadioSelect,
+        label="Urgente?"
+    )
+
+    prazo_maximo = forms.CharField(
+        label="Qual o prazo máximo?",
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'dd/mm/aaaa'})
+    )
+
+    # --- Dados de Origem ---
+    local_origem = forms.CharField(label="Local Origem")
+    endereco_origem = forms.CharField(label="Endereço de Origem")
+    referencia_origem = forms.CharField(label="Ponto de Referência", required=False)
+    telefone_origem = forms.CharField(label="Telefone do Responsável")
+    data_coleta_origem = forms.DateField(label="Data da Coleta", widget=forms.DateInput(attrs={'type': 'date'}))
+    hora_coleta_origem = forms.TimeField(label="Hora da Coleta", widget=forms.TimeInput(attrs={'type': 'time'}))
+    observacao_origem = forms.CharField(label="Observação", required=False, widget=forms.Textarea)
+
+    # --- Dados da Coleta (iguais aos de origem) ---
+    local_coleta = forms.CharField(label="Local Coleta")
+    endereco_coleta = forms.CharField(label="Endereço de Coleta")
+    referencia_coleta = forms.CharField(label="Ponto de Referência", required=False)
+    telefone_coleta = forms.CharField(label="Telefone do Responsável")
+    data_coleta = forms.DateField(label="Data da Coleta", widget=forms.DateInput(attrs={'type': 'date'}))
+    hora_coleta = forms.TimeField(label="Hora da Coleta", widget=forms.TimeInput(attrs={'type': 'time'}))
+    observacao_coleta = forms.CharField(label="Observação", required=False, widget=forms.Textarea)
+
