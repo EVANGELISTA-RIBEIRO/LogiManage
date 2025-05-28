@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiManage - Painel de Controle</title>
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/painel.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="painel-de-controle">
+        <!-- Sidebar -->
+        <div class="side-bar">
+            <div class="top-parent">
+                <div class="top">
+                    <div class="logo">
+                        <img class="icon" alt="Logo" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg'%}">
+                        <div class="logimanage">LogiManage</div>
+                    </div>
+                </div>
+                <div class="list-menu">
+                    <div class="list-menu1">
+                        <a href="#" class="list-menu2 active">
+                            <div class="content">
+                                <img class="home-icon" alt="Início" src="{% static 'logimanageapp/imgs/logo-inicio-menu-preto.svg'%}">
+                                <div class="text">Início</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu3">
+                            <div class="content">
+                                <img class="home-icon" alt="Painel" src="{% static 'logimanageapp/imgs/logo-painel-menu-azul.svg'%}">
+                                <div class="text">Painel De Controle</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Requisição" src="{% static 'logimanageapp/imgs/logo-requisicao-menu.svg' %}">
+                                <div class="text">Requisição</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Formulários" src="{% static 'logimanageapp/imgs/logo-formulario-menu.svg'%}">
+                                <div class="text">Formulários</div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-menu2">
+                            <div class="content">
+                                <img class="home-icon" alt="Perfil" src="{% static 'logimanageapp/imgs/logo-perfil-menu.svg'%}">
+                                <div class="text">Perfil</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Tabela de Equipamentos -->
+            <div class="tabela-container">
+                <h2 class="equipamentos-title">Equipamentos</h2>
+                
+                <div class="table-responsive">
+                    <table class="equipamentos-table">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>COD (SAP)</th>
+                                <th>Data Retorno/Prorrogação</th>
+                                <th>Nome (SAP)</th>
+                                <th>ALIAS</th>
+                                <th>Motivo</th>
+                                <th>Valor</th>
+                                <th>Part Number</th>
+                                <th>Serial number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>EQP001</td>
+                                <td>15/06/2023</td>
+                                <td>Guindaste 5T</td>
+                                <td>GD5</td>
+                                <td>Manutenção</td>
+                                <td>R$ 1.200,00</td>
+                                <td>PN-1234</td>
+                                <td>SN-5678</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>EQP002</td>
+                                <td>20/06/2023</td>
+                                <td>Empilhadeira</td>
+                                <td>EMP2</td>
+                                <td>Transporte</td>
+                                <td>R$ 800,00</td>
+                                <td>PN-5678</td>
+                                <td>SN-9012</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>EQP003</td>
+                                <td>25/06/2023</td>
+                                <td>Betoneira</td>
+                                <td>BT3</td>
+                                <td>Obra</td>
+                                <td>R$ 1.500,00</td>
+                                <td>PN-9012</td>
+                                <td>SN-3456</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>EQP004</td>
+                                <td>30/06/2023</td>
+                                <td>Compactador</td>
+                                <td>CPT1</td>
+                                <td>Construção</td>
+                                <td>R$ 2.300,00</td>
+                                <td>PN-3456</td>
+                                <td>SN-7890</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>EQP005</td>
+                                <td>05/07/2023</td>
+                                <td>Gerador</td>
+                                <td>GER3</td>
+                                <td>Energia</td>
+                                <td>R$ 3.500,00</td>
+                                <td>PN-5678</td>
+                                <td>SN-1234</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <a href="#" class="pagination-button prev-button">
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </a>
+                    <div class="page-info">
+                        Página <span class="current-page">1</span> de <span class="total-pages">5</span>
+                    </div>
+                    <a href="#" class="pagination-button next-button">
+                        Próximo <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
