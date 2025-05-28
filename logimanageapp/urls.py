@@ -6,6 +6,9 @@ from logimanageapp.views import (
     registro_view,
     logar_usuario,
     requisicao_view,
+    perfil_view,
+    formularios_view,
+    painel_view,
 )
 
 urlpatterns = [
@@ -15,4 +18,7 @@ urlpatterns = [
     path("registrar_usuario/", registrar_usuario, name="registrar_usuario"),
     path("home/", home_view, name="home"),
     path("requisicao/", requisicao_view, name="requisicao"),
+    path("perfil/", perfil_view, name="perfil"),
+    path("formularios/", formularios_view, name="formularios"),
+    path("painel/", painel_view, name="painel"),
 ]

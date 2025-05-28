@@ -58,3 +58,12 @@ def home_view(request):
 
 def requisicao_view(request):
     return render(request, "logimanageapp/views/requisicao.html")
+
+def perfil_view(request): 
+    return render(request, "logimanageapp/views/perfil.html")
+
+def formularios_view(request): 
+    return render(request, "logimanageapp/views/formularios.html")
+
+def painel_view(request):
+    return render(request, "logimanageapp/views/painel.html")
