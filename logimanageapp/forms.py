@@ -2,6 +2,8 @@ from django  import forms
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 
+from logimanageapp.models import Requisicao
+
 class RegistroForm(forms.ModelForm):
     senha = forms.CharField(
             widget = forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Insira sua senha'}),
@@ -93,72 +95,78 @@ class LoginForm(forms.Form):
         username = self.cleaned_data.get('username')
         return username.strip().replace(' ', '_')
 
-class RequisicaoForm(forms.Form):
-    # --- Dados sobre o Equipamento ---
-    PECULIARIDADES_CHOICES = [
-        ('fragil', 'Frágil'),
-        ('liquido', 'Líquido'),
-        ('refrigerado', 'Refrigerado'),
-        ('toxico', 'Tóxico'),
-    ]
+from django import forms
+from .models import Requisicao
 
-    peculiaridades = forms.MultipleChoiceField(
-        choices=PECULIARIDADES_CHOICES,
-        widget=forms.CheckboxSelectMultiple,
-        label="A carga possui alguma peculiaridade?",
-        required=False
-    )
-
-    outra_peculiaridade = forms.CharField(
-        label="Outro",
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Especifique'})
-    )
-
-    embalada = forms.ChoiceField(
-        choices=[('sim', 'Sim'), ('nao', 'Não')],
-        widget=forms.RadioSelect,
-        label="A carga a ser transportada já está embalada?"
-    )
-
-    necessita_embalagem = forms.ChoiceField(
-        choices=[('sim', 'Sim'), ('nao', 'Não')],
-        widget=forms.RadioSelect,
-        label="Será necessário algum tipo de embalagem?"
-    )
-
-    tipo_embalagem = forms.CharField(
-        label="Tipo de Embalagem",
-        required=False
-    )
-
-    urgente = forms.ChoiceField(
-        choices=[('sim', 'Sim'), ('nao', 'Não')],
-        widget=forms.RadioSelect,
-        label="Urgente?"
-    )
-
-    prazo_maximo = forms.CharField(
-        label="Qual o prazo máximo?",
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'dd/mm/aaaa'})
-    )
-
-    # --- Dados de Origem ---
-    local_origem = forms.CharField(label="Local Origem")
-    endereco_origem = forms.CharField(label="Endereço de Origem")
-    referencia_origem = forms.CharField(label="Ponto de Referência", required=False)
-    telefone_origem = forms.CharField(label="Telefone do Responsável")
-    data_coleta_origem = forms.DateField(label="Data da Coleta", widget=forms.DateInput(attrs={'type': 'date'}))
-    hora_coleta_origem = forms.TimeField(label="Hora da Coleta", widget=forms.TimeInput(attrs={'type': 'time'}))
-    observacao_origem = forms.CharField(label="Observação", required=False, widget=forms.Textarea)
-
-    # --- Dados da Coleta (iguais aos de origem) ---
-    local_coleta = forms.CharField(label="Local Coleta")
-    endereco_coleta = forms.CharField(label="Endereço de Coleta")
-    referencia_coleta = forms.CharField(label="Ponto de Referência", required=False)
-    telefone_coleta = forms.CharField(label="Telefone do Responsável")
-    data_coleta = forms.DateField(label="Data da Coleta", widget=forms.DateInput(attrs={'type': 'date'}))
-    hora_coleta = forms.TimeField(label="Hora da Coleta", widget=forms.TimeInput(attrs={'type': 'time'}))
-    observacao_coleta = forms.CharField(label="Observação", required=False, widget=forms.Textarea)
-
+class RequisicaoForm(forms.ModelForm):
+    class Meta:
+        model = Requisicao
+        fields = '__all__'
+        widgets = {
+            'prazo_maximo': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'data_coleta_origem': forms.DateInput(attrs={'type': 'date'}),
+            'hora_coleta_origem': forms.TimeInput(attrs={'type': 'time'}),
+            'data_coleta': forms.DateInput(attrs={'type': 'date'}),
+            'hora_coleta': forms.TimeInput(attrs={'type': 'time'}),
+        }
+        labels = {
+            'peculiaridades': 'A carga possui alguma peculiaridade?',
+            'outro': 'Outro',
+            'embalada': 'A carga a ser transportada já está embalada?',
+            'necessita_embalagem': 'Será necessário algum tipo de embalagem?',
+            'tipo_embalagem': 'Tipo de Embalagem',
+            'urgente': 'Urgente?',
+            'prazo_maximo': 'Qual o prazo máximo?',
+            'local_origem': 'Local Origem',
+            'endereco_origem': 'Endereço de Origem',
+            'referencia_origem': 'Ponto de Referência',
+            'telefone_origem': 'Telefone do Responsável',
+            'data_coleta_origem': 'Data da Coleta',
+            'hora_coleta_origem': 'Hora da Coleta',
+            'observacao_origem': 'Observação',
+            'local_coleta': 'Local Coleta',
+            'endereco_coleta': 'Endereço de Coleta',
+            'referencia_coleta': 'Ponto de Referência',
+            'telefone_coleta': 'Telefone do Responsável',
+            'data_coleta': 'Data da Coleta',
+            'hora_coleta': 'Hora da Coleta',
+            'observacao_coleta': 'Observação',
+            'numero_transporte': 'Nº Transporte',
+            'motivo': 'Motivo',
+            'cod_sap': 'COD (SAP)',
+            'alias': 'Alías',
+            'comprimento': 'Comprimento',
+            'largura': 'Largura',
+            'altura': 'Altura',
+            'peso': 'Peso',
+            'valor': 'Valor',
+            'part_number': 'Part Number',
+            'serial_number': 'Serial Number',
+        }
+        help_texts = {
+            'peculiaridades': 'Descreva as peculiaridades da carga, se houver.',
+            'outro': 'Especifique outro tipo de embalagem, se necessário.',
+            'tipo_embalagem': 'Informe o tipo de embalagem necessária, se aplicável.',
+            'observacao_origem': 'Observações adicionais sobre a origem da carga.',
+            'observacao_coleta': 'Observações adicionais sobre a coleta da carga.',
+        }
+        error_messages = {
+            'local_origem': {
+                'required': 'Por favor informe o local de origem!',
+            },
+            'endereco_origem': {
+                'required': 'Por favor informe o endereço de origem!',
+            },
+            'telefone_origem': {
+                'required': 'Por favor informe o telefone do responsável pela carga!',
+            },
+            'local_coleta': {
+                'required': 'Por favor informe o local de coleta!',
+            },
+            'endereco_coleta': {
+                'required': 'Por favor informe o endereço de coleta!',
+            },
+            'telefone_coleta': {
+                'required': 'Por favor informe o telefone do responsável pela coleta!',
+            },
+        }

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logimanage"
-version = "0.1.0a16"
+version = "0.1.0a17"
 description = ""
 authors = ["EVANGELISTA-RIBEIRO <joaovictor.setembro@gmail.com>"]
 readme = "README.md"
@@ -11,6 +11,7 @@ python = ">=3.10"
 django = "^5.1.7"
 pytest = "^8.3.5"
 python-docx = "^1.1.2"
+djangorestframework = "^3.16.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
