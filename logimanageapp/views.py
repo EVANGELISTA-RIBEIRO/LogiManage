@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from logimanageapp.forms import LoginForm, RegistroForm
+from rest_framework import viewsets
+from logimanageapp.models import Requisicao
+from logimanageapp.serializers import RequisicaoSerializer
+from rest_framework.permissions import AllowAny
 
 def registro_view(request):
     form = RegistroForm(
@@ -67,3 +71,13 @@ def formularios_view(request):
 
 def painel_view(request):
     return render(request, "logimanageapp/views/painel.html")
+
+class RequisicaoViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para gerenciar as requisições de transporte.
+    Permite listar, criar, atualizar e deletar requisições.
+    """
+
+    permission_classes = [AllowAny]  # Define suas permissões aqui, se necessário
+    queryset = Requisicao.objects.all()
+    serializer_class = RequisicaoSerializer
