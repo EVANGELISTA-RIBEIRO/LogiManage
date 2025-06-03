@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 from logimanageapp.views import (
     home_view,
     login_view,
@@ -9,7 +10,11 @@ from logimanageapp.views import (
     perfil_view,
     formularios_view,
     painel_view,
+    RequisicaoViewSet
 )
+
+router = DefaultRouter()
+router.register(r'requisicoes', RequisicaoViewSet, basename='requisicao')
 
 urlpatterns = [
     path('', login_view, name='login'),
@@ -21,4 +26,5 @@ urlpatterns = [
     path("perfil/", perfil_view, name="perfil"),
     path("formularios/", formularios_view, name="formularios"),
     path("painel/", painel_view, name="painel"),
+    path('api/', include(router.urls)),
 ]
