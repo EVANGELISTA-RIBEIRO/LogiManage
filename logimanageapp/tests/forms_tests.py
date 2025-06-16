@@ -52,7 +52,7 @@ class TestRegistroForm:
         assert not form.is_valid()
         assert 'email' in form.errors
         # Observação: Mensagem esperada no plano de testes é 'Este endereço de e-mail já está em uso!'
-        assert form.errors['email'][0] == 'Este endereço de e-mail é válido'
+        assert form.errors['email'][0] == 'Este endereço de e-mail já está em uso!'
 
     def test_username_cleaning(self):
         # CT-005: Validação da limpeza do nome de usuário no formulário de registro.

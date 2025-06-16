@@ -8,43 +8,13 @@
     <title>LogiManage - Início</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="{% static 'logimanageapp/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}"> {# Link para o CSS da sidebar #}
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo-container">
-                <img class="logo-icon" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg' %}" alt="Logo LogiManage">
-                <div class="logo-text">LogiManage</div>
-            </div>
-            
-            <nav class="menu">
-                <a href="#" class="menu-item active">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-inicio-menu.svg' %}" alt="Início">
-                    <span>Início</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-painel-menu.svg' %}" alt="Painel">
-                    <span>Painel De Controle</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-requisicao-menu.svg' %}" alt="Requisição">
-                    <span>Requisição</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-formulario-menu.svg' %}" alt="Formulários">
-                    <span>Formulários</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-perfil-menu.svg' %}" alt="Perfil">
-                    <span>Perfil</span>
-                </a>
-            </nav>
-        </div>
+        {% include 'logimanageapp/includes/sidebar.html' %} {# Agora a sidebar é um include! #}
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-content">
                     <h1 class="hero-title">LogiManage: Gestão Eficiente de Transportes</h1>
@@ -55,9 +25,7 @@
                 </div>
             </section>
 
-            <!-- Features Grid -->
             <div class="features-grid">
-                <!-- Feature 1 -->
                 <div class="feature-card">
                     <div class="feature-icon">
                         <img src="{% static 'logimanageapp/imgs/img-card2.svg' %}" alt="Transportes">
@@ -65,7 +33,6 @@
                     <h3 class="feature-title">Acompanhe e gerencie todos os transportes em andamento.</h3>
                 </div>
                 
-                <!-- Feature 2 -->
                 <div class="feature-card highlight">
                     <div class="feature-icon">
                         <img src="{% static 'logimanageapp/imgs/img-card1.svg' %}" alt="Equipamentos">
@@ -73,7 +40,6 @@
                     <h3 class="feature-title">Gerenciamento de Equipamentos.</h3>
                 </div>
                 
-                <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="feature-icon">
                         <img src="{% static 'logimanageapp/imgs/img-card3.svg' %}" alt="Formulários">

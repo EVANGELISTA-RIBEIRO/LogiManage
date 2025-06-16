@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Requisição</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos customizados para o botão X */
+        .btn-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        .btn-close:hover {
+            opacity: 1;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1>Formulário de Requisição Multi-Etapas</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEtapa1">
+            Abrir Formulário de Requisição
+        </button>
+    </div>
+
+    <div class="modal fade" id="modalEtapa1" tabindex="-1" aria-labelledby="modalEtapa1Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEtapa1Label">Etapa 1: Características da Carga</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEtapa1" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form1.as_p }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnProximoEtapa1">Próximo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEtapa2" tabindex="-1" aria-labelledby="modalEtapa2Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEtapa2Label">Etapa 2: Informações de Origem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEtapa2" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form2.as_p }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnProximoEtapa2">Próximo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEtapa3" tabindex="-1" aria-labelledby="modalEtapa3Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEtapa3Label">Etapa 3: Informações de Destino</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEtapa3" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form3.as_p }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnProximoEtapa3">Próximo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEtapa4" tabindex="-1" aria-labelledby="modalEtapa4Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEtapa4Label">Etapa 4: Detalhes da Carga e Transporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEtapa4" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form4.as_p }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success" id="btnSalvarEtapa4">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Função para alternar modais
+            function showModal(currentModalId, nextModalId) {
+                $(currentModalId).modal('hide');
+                $(nextModalId).modal('show');
+            }
+
+            // Esconder o modal atual e mostrar o próximo
+            $('#btnProximoEtapa1').on('click', function() {
+                // Aqui você pode adicionar lógica de validação do formulário da etapa 1 antes de avançar
+                if ($('#formEtapa1')[0].checkValidity()) {
+                    showModal('#modalEtapa1', '#modalEtapa2');
+                } else {
+                    $('#formEtapa1').addClass('was-validated');
+                }
+            });
+
+            $('#btnProximoEtapa2').on('click', function() {
+                // Lógica de validação da etapa 2
+                if ($('#formEtapa2')[0].checkValidity()) {
+                    showModal('#modalEtapa2', '#modalEtapa3');
+                } else {
+                    $('#formEtapa2').addClass('was-validated');
+                }
+            });
+
+            $('#btnProximoEtapa3').on('click', function() {
+                // Lógica de validação da etapa 3
+                if ($('#formEtapa3')[0].checkValidity()) {
+                    showModal('#modalEtapa3', '#modalEtapa4');
+                } else {
+                    $('#formEtapa3').addClass('was-validated');
+                }
+            });
+
+            // Lidar com o botão Salvar da Etapa 4
+            $('#btnSalvarEtapa4').on('click', function(e) {
+                e.preventDefault(); // Impede o envio padrão do formulário
+                // Lógica de validação da etapa 4
+                if ($('#formEtapa4')[0].checkValidity()) {
+                    // Coletar todos os dados dos formulários
+                    let formData = new FormData();
+
+                    // Anexar dados da Etapa 1
+                    $('#formEtapa1 input, #formEtapa1 select, #formEtapa1 textarea').each(function() {
+                        if ($(this).attr('type') === 'checkbox') {
+                            formData.append($(this).attr('name'), $(this).prop('checked'));
+                        } else {
+                            formData.append($(this).attr('name'), $(this).val());
+                        }
+                    });
+
+                    // Anexar dados da Etapa 2
+                    $('#formEtapa2 input, #formEtapa2 select, #formEtapa2 textarea').each(function() {
+                        if ($(this).attr('type') === 'checkbox') {
+                            formData.append($(this).attr('name'), $(this).prop('checked'));
+                        } else {
+                            formData.append($(this).attr('name'), $(this).val());
+                        }
+                    });
+
+                    // Anexar dados da Etapa 3
+                    $('#formEtapa3 input, #formEtapa3 select, #formEtapa3 textarea').each(function() {
+                        if ($(this).attr('type') === 'checkbox') {
+                            formData.append($(this).attr('name'), $(this).prop('checked'));
+                        } else {
+                            formData.append($(this).attr('name'), $(this).val());
+                        }
+                    });
+
+                    // Anexar dados da Etapa 4
+                    $('#formEtapa4 input, #formEtapa4 select, #formEtapa4 textarea').each(function() {
+                        if ($(this).attr('type') === 'checkbox') {
+                            formData.append($(this).attr('name'), $(this).prop('checked'));
+                        } else {
+                            formData.append($(this).attr('name'), $(this).val());
+                        }
+                    });
+
+                    // Adicionar o token CSRF
+                    formData.append('csrfmiddlewaretoken', $('[name="csrfmiddlewaretoken"]').val());
+
+
+                    // Enviar todos os dados via AJAX para a view Django
+                    $.ajax({
+                        url: '{% url "teste_processar_requisicao" %}', // Certifique-se de que esta URL está configurada no seu urls.py
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            // Fechar o modal
+                            $('#modalEtapa4').modal('hide');
+                            // Redirecionar ou mostrar mensagem de sucesso
+                            window.location.href = '{% url "teste_sucesso" %}'; // Redireciona para a página de sucesso
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Erro ao salvar a requisição:", error);
+                            // Aqui você pode adicionar lógica para mostrar erros ao usuário,
+                            // talvez reabrindo o modal com os erros de validação
+                            alert('Erro ao salvar a requisição. Por favor, tente novamente.');
+                            // Se o servidor retornar erros de validação, você pode tentar parsear o JSON
+                            // e exibir os erros nos campos corretos dos formulários
+                            if (xhr.status === 400) { // Bad Request, geralmente com erros de validação
+                                let errors = xhr.responseJSON;
+                                // Implemente a lógica para exibir os errors no modal apropriado
+                                console.log(errors);
+                            }
+                        }
+                    });
+                } else {
+                    $('#formEtapa4').addClass('was-validated');
+                }
+            });
+
+            // Lidar com o botão Cancelar (fechar todos os modais)
+            $('.btn-secondary[data-bs-dismiss="modal"]').on('click', function() {
+                $('.modal').modal('hide');
+            });
+
+            // Lidar com o botão X (fechar todos os modais)
+            $('.btn-close[data-bs-dismiss="modal"]').on('click', function() {
+                $('.modal').modal('hide');
+            });
+        });
+    </script>
+</body>
+</html>
