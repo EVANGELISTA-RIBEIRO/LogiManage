@@ -40,6 +40,28 @@ O **LogiManage** é um sistema desenvolvido para gerenciar e otimizar a moviment
 ## Como Executar o Projeto
 
 1. **Clone o repositório**:
-   ```bash
+  ```bash
    git clone <url-do-repositorio>
    cd LogiManage
+   ```
+
+2. **Execute o comando**:
+  ```bash
+   pjenv
+   ```
+
+3. **Instale as dependências:**
+  ```bash
+   poetry install
+   ```
+
+4. **Crie e aplique as migrações:**
+  ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+5. **Execute o servidor de desenvolvimento:**
+  ```bash
+   python manage.py runserver
+   ```

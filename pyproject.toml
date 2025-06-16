@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logimanage"
-version = "0.1.0a18"
+version = "0.1.0a19"
 description = ""
 authors = ["EVANGELISTA-RIBEIRO <joaovictor.setembro@gmail.com>"]
 readme = "README.md"

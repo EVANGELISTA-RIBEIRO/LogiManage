@@ -10,7 +10,11 @@ from logimanageapp.views import (
     perfil_view,
     formularios_view,
     painel_view,
-    RequisicaoViewSet
+    RequisicaoViewSet,
+    teste_process_requisition_submission, # Teste function
+    teste_sucesso, # Teste function
+    view_teste, # Teste function
+    process_requisition_submission
 )
 
 router = DefaultRouter()
@@ -26,5 +30,9 @@ urlpatterns = [
     path("perfil/", perfil_view, name="perfil"),
     path("formularios/", formularios_view, name="formularios"),
     path("painel/", painel_view, name="painel"),
+    path("teste_view/", view_teste, name="teste_view"),
+    path("teste_process_requisition_submission/", teste_process_requisition_submission, name="teste_processar_requisicao"),
+    path("teste_sucesso/", teste_sucesso, name="teste_sucesso"),
+    path("processar_requisicao/", process_requisition_submission, name="processar_requisicao"),
     path('api/', include(router.urls)),
 ]

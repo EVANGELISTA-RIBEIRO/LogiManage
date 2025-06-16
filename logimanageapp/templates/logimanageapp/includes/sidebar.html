@@ -1,13 +1,50 @@
 {% load static %}
 
-<div class="side-bar">
-    <div class="top-parent">
-        <div class="top">
-            <div class="logo">
-                <img class="icon" alt="" src={% static "logimanageapp/imgs/53.png" %}>
-                <div class="logimanage">LogiManage</div>
-            </div>
-        </div>
-        {% include 'logimanageapp/includes/menu.html' %}
+<div class="sidebar">
+    <div class="logo-container">
+        <img class="logo-icon" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg' %}" alt="Logo LogiManage">
+        <div class="logo-text">LogiManage</div>
     </div>
+    
+    <nav class="menu">
+        {# Item de Menu: Início #}
+        <a href="{% url 'home' %}" class="menu-item {% if active_page == 'home' %}active{% endif %}">
+            <img class="menu-icon" 
+                src="{% if active_page == 'home' %}{% static 'logimanageapp/imgs/logo-inicio-menu-azul.svg' %}{% else %}{% static 'logimanageapp/imgs/logo-inicio-menu.svg' %}{% endif %}" 
+                alt="Início">
+            <span>Início</span>
+        </a>
+
+        {# Item de Menu: Painel de Controle #}
+        <a href="{% url 'painel' %}" class="menu-item {% if active_page == 'painel' %}active{% endif %}">
+            <img class="menu-icon" 
+                src="{% if active_page == 'painel' %}{% static 'logimanageapp/imgs/logo-painel-menu-azul.svg' %}{% else %}{% static 'logimanageapp/imgs/logo-painel-menu.svg' %}{% endif %}" 
+                alt="Painel">
+            <span>Painel De Controle</span>
+        </a>
+
+        {# Item de Menu: Requisição #}
+        <a href="{% url 'requisicao' %}" class="menu-item {% if active_page == 'requisicao' %}active{% endif %}">
+            <img class="menu-icon" 
+                src="{% if active_page == 'requisicao' %}{% static 'logimanageapp/imgs/logo-requisicao-menu-azul.svg' %}{% else %}{% static 'logimanageapp/imgs/logo-requisicao-menu.svg' %}{% endif %}" 
+                alt="Requisição">
+            <span>Requisição</span>
+        </a>
+
+        {# Item de Menu: Formulários #}
+        <a href="{% url 'formularios' %}" class="menu-item {% if active_page == 'formularios' %}active{% endif %}">
+            <img class="menu-icon" 
+                src="{% if active_page == 'formularios' %}{% static 'logimanageapp/imgs/logo-formulario-menu-azul.svg' %}{% else %}{% static 'logimanageapp/imgs/logo-formulario-menu.svg' %}{% endif %}" 
+                alt="Formulários">
+            <span>Formulários</span>
+        </a>
+
+        {# Item de Menu: Perfil #}
+        <a href="{% url 'perfil' %}" class="menu-item {% if active_page == 'perfil' %}active{% endif %}">
+            <img class="menu-icon" 
+                src="{% if active_page == 'perfil' %}{% static 'logimanageapp/imgs/logo-perfil-menu-azul.svg' %}{% else %}{% static 'logimanageapp/imgs/logo-perfil-menu.svg' %}{% endif %}" 
+                alt="Perfil">
+            <span>Perfil</span>
+        </a>
+    </nav>
 </div>

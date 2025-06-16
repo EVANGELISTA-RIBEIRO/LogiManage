@@ -95,78 +95,148 @@ class LoginForm(forms.Form):
         username = self.cleaned_data.get('username')
         return username.strip().replace(' ', '_')
 
-from django import forms
-from .models import Requisicao
+# Definição de choices (se já não estiver em models.py ou outro lugar)
+SIM_NAO_CHOICES = [
+    ('sim', 'Sim'),
+    ('nao', 'Não'),
+]
 
-class RequisicaoForm(forms.ModelForm):
+class RequisicaoFormEtapa1(forms.ModelForm):
+    # Definindo campos personalizados para adicionar widgets com 'input-text'
+    # Os campos que já estão no Meta.widgets ou são RadioSelect/CheckboxInput
+    # não precisam ser redefinidos aqui, a menos que queira adicionar attrs extras.
+    # Vou adicionar 'input-text' nos campos textuais via Meta.widgets diretamente.
+
     class Meta:
         model = Requisicao
-        fields = '__all__'
+        fields = [
+            'fragil', 'liquido', 'toxico', 'refrigerado', 'outro', 'prazo_maximo',
+            'embalada', 'necessita_embalagem', 'tipo_embalagem', 'urgente',
+        ]
         widgets = {
-            'prazo_maximo': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'data_coleta_origem': forms.DateInput(attrs={'type': 'date'}),
-            'hora_coleta_origem': forms.TimeInput(attrs={'type': 'time'}),
-            'data_coleta': forms.DateInput(attrs={'type': 'date'}),
-            'hora_coleta': forms.TimeInput(attrs={'type': 'time'}),
+            'prazo_maximo': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'input-text'}),
+            'fragil': forms.CheckboxInput(attrs={'class': 'checkbox-input'}), # Se o CSS modal.css usar uma classe para checkboxes
+            'liquido': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
+            'toxico': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
+            'refrigerado': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
+            'embalada': forms.RadioSelect(choices=SIM_NAO_CHOICES),
+            'necessita_embalagem': forms.RadioSelect(choices=SIM_NAO_CHOICES),
+            'urgente': forms.RadioSelect(choices=SIM_NAO_CHOICES),
+            # Adicionando 'input-text' para campos de texto
+            'outro': forms.TextInput(attrs={'class': 'input-text'}),
+            'tipo_embalagem': forms.TextInput(attrs={'class': 'input-text'}),
         }
         labels = {
-            'peculiaridades': 'A carga possui alguma peculiaridade?',
-            'outro': 'Outro',
+            'fragil': 'Frágil',
+            'liquido': 'Líquido',
+            'toxico': 'Tóxico',
+            'refrigerado': 'Refrigerado',
+            'outro': 'Outros',
             'embalada': 'A carga a ser transportada já está embalada?',
             'necessita_embalagem': 'Será necessário algum tipo de embalagem?',
             'tipo_embalagem': 'Tipo de Embalagem',
             'urgente': 'Urgente?',
             'prazo_maximo': 'Qual o prazo máximo?',
+        }
+
+class RequisicaoFormEtapa2(forms.ModelForm):
+    class Meta:
+        model = Requisicao
+        fields = [
+            'local_origem', 'endereco_origem', 'referencia_origem', 'responsavel_origem',
+            'telefone_origem', 'data_origem', 'hora_origem', 'observacao_origem'
+        ]
+        widgets = {
+            'local_origem': forms.TextInput(attrs={'class': 'input-text'}),
+            'endereco_origem': forms.TextInput(attrs={'class': 'input-text'}),
+            'referencia_origem': forms.TextInput(attrs={'class': 'input-text'}),
+            'responsavel_origem': forms.TextInput(attrs={'class': 'input-text'}),
+            'telefone_origem': forms.TextInput(attrs={'class': 'input-text'}),
+            'data_origem': forms.DateInput(attrs={'type': 'date', 'class': 'input-text'}),
+            'hora_origem': forms.TimeInput(attrs={'type': 'time', 'class': 'input-text'}),
+            'observacao_origem': forms.Textarea(attrs={'class': 'input-text', 'rows': 3}), # Defini 'rows' para manter a altura
+        }
+        labels = {
             'local_origem': 'Local Origem',
             'endereco_origem': 'Endereço de Origem',
             'referencia_origem': 'Ponto de Referência',
+            'responsavel_origem': 'Responsável pela Carga',
             'telefone_origem': 'Telefone do Responsável',
-            'data_coleta_origem': 'Data da Coleta',
-            'hora_coleta_origem': 'Hora da Coleta',
-            'observacao_origem': 'Observação',
-            'local_coleta': 'Local Coleta',
-            'endereco_coleta': 'Endereço de Coleta',
-            'referencia_coleta': 'Ponto de Referência',
-            'telefone_coleta': 'Telefone do Responsável',
-            'data_coleta': 'Data da Coleta',
-            'hora_coleta': 'Hora da Coleta',
-            'observacao_coleta': 'Observação',
+            'data_origem': 'Data da Coleta',
+            'hora_origem': 'Hora da Coleta',
+            'observacao_origem': 'Observações',
+        }
+        error_messages = {
+            'local_origem': {'required': 'Por favor informe o local de origem!'},
+            'endereco_origem': {'required': 'Por favor informe o endereço de origem!'},
+            'telefone_origem': {'required': 'Por favor informe o telefone do responsável pela carga!'},
+        }
+
+
+class RequisicaoFormEtapa3(forms.ModelForm):
+    class Meta:
+        model = Requisicao
+        fields = [
+            'local_destino', 'endereco_destino', 'referencia_destino', 'responsavel_destino',
+            'telefone_destino', 'data_destino', 'hora_destino', 'observacao_destino'
+        ]
+        widgets = {
+            'local_destino': forms.TextInput(attrs={'class': 'input-text'}),
+            'endereco_destino': forms.TextInput(attrs={'class': 'input-text'}),
+            'referencia_destino': forms.TextInput(attrs={'class': 'input-text'}),
+            'responsavel_destino': forms.TextInput(attrs={'class': 'input-text'}),
+            'telefone_destino': forms.TextInput(attrs={'class': 'input-text'}),
+            'data_destino': forms.DateInput(attrs={'type': 'date', 'class': 'input-text'}),
+            'hora_destino': forms.TimeInput(attrs={'type': 'time', 'class': 'input-text'}),
+            'observacao_destino': forms.Textarea(attrs={'class': 'input-text', 'rows': 3}), # Defini 'rows' para manter a altura
+        }
+        labels = {
+            'local_destino': 'Local Destino',
+            'endereco_destino': 'Endereço de Destino',
+            'referencia_destino': 'Ponto de Referência',
+            'responsavel_destino': 'Responsável pela Entrega',
+            'telefone_destino': 'Telefone do Responsável',
+            'data_destino': 'Data da Entrega',
+            'hora_destino': 'Hora da Entrega',
+            'observacao_destino': 'Observação',
+        }
+        error_messages = {
+            'local_destino': {'required': 'Por favor informe o local de destino!'},
+            'endereco_destino': {'required': 'Por favor informe o endereço de destino!'},
+            'telefone_destino': {'required': 'Por favor informe o telefone do responsável!'},
+        }
+
+class RequisicaoFormEtapa4(forms.ModelForm):
+    class Meta:
+        model = Requisicao
+        fields = [
+            'numero_transporte', 'motivo', 'cod_sap', 'alias',
+            'comprimento', 'largura', 'altura', 'peso', 'valor',
+            'part_number', 'serial_number'
+        ]
+        widgets = {
+            'numero_transporte': forms.TextInput(attrs={'class': 'input-text'}),
+            'motivo': forms.TextInput(attrs={'class': 'input-text'}),
+            'cod_sap': forms.TextInput(attrs={'class': 'input-text'}),
+            'alias': forms.TextInput(attrs={'class': 'input-text'}),
+            'comprimento': forms.NumberInput(attrs={'class': 'input-text'}), # Assumindo que são campos numéricos
+            'largura': forms.NumberInput(attrs={'class': 'input-text'}),
+            'altura': forms.NumberInput(attrs={'class': 'input-text'}),
+            'peso': forms.NumberInput(attrs={'class': 'input-text'}),
+            'valor': forms.NumberInput(attrs={'class': 'input-text'}),
+            'part_number': forms.TextInput(attrs={'class': 'input-text'}),
+            'serial_number': forms.TextInput(attrs={'class': 'input-text'}),
+        }
+        labels = {
             'numero_transporte': 'Nº Transporte',
             'motivo': 'Motivo',
             'cod_sap': 'COD (SAP)',
-            'alias': 'Alías',
-            'comprimento': 'Comprimento',
-            'largura': 'Largura',
-            'altura': 'Altura',
-            'peso': 'Peso',
+            'alias': 'Alias',
+            'comprimento': 'Comprimento (cm)',
+            'largura': 'Largura (cm)',
+            'altura': 'Altura (cm)',
+            'peso': 'Peso (kg)',
             'valor': 'Valor',
             'part_number': 'Part Number',
             'serial_number': 'Serial Number',
-        }
-        help_texts = {
-            'peculiaridades': 'Descreva as peculiaridades da carga, se houver.',
-            'outro': 'Especifique outro tipo de embalagem, se necessário.',
-            'tipo_embalagem': 'Informe o tipo de embalagem necessária, se aplicável.',
-            'observacao_origem': 'Observações adicionais sobre a origem da carga.',
-            'observacao_coleta': 'Observações adicionais sobre a coleta da carga.',
-        }
-        error_messages = {
-            'local_origem': {
-                'required': 'Por favor informe o local de origem!',
-            },
-            'endereco_origem': {
-                'required': 'Por favor informe o endereço de origem!',
-            },
-            'telefone_origem': {
-                'required': 'Por favor informe o telefone do responsável pela carga!',
-            },
-            'local_coleta': {
-                'required': 'Por favor informe o local de coleta!',
-            },
-            'endereco_coleta': {
-                'required': 'Por favor informe o endereço de coleta!',
-            },
-            'telefone_coleta': {
-                'required': 'Por favor informe o telefone do responsável pela coleta!',
-            },
         }

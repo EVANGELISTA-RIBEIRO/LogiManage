@@ -2,7 +2,10 @@ from django.db import models
 
 class Requisicao(models.Model):
     # Dados gerais
-    peculiaridade = models.JSONField(blank=True, null=True)
+    fragil = models.BooleanField(default=False)
+    liquido = models.BooleanField(default=False)
+    toxico = models.BooleanField(default=False)
+    refrigerado = models.BooleanField(default=False)
     outro = models.CharField(max_length=255, blank=True)
     embalada = models.BooleanField()
     necessita_embalagem = models.BooleanField()
@@ -14,24 +17,25 @@ class Requisicao(models.Model):
     local_origem = models.CharField(max_length=255)
     endereco_origem = models.CharField(max_length=255)
     referencia_origem = models.CharField(max_length=255, blank=True)
+    responsavel_origem = models.CharField(max_length=100, blank=True, null=True)
     telefone_origem = models.CharField(max_length=20)
-    data_coleta_origem = models.DateField()
-    hora_coleta_origem = models.TimeField()
+    data_origem = models.DateField()
+    hora_origem = models.TimeField()
     observacao_origem = models.TextField(blank=True)
 
-    # Dados de coleta (iguais aos de origem)
-    local_coleta = models.CharField(max_length=255)
-    endereco_coleta = models.CharField(max_length=255)
-    referencia_coleta = models.CharField(max_length=255, blank=True)
-    telefone_coleta = models.CharField(max_length=20)
-    data_coleta = models.DateField()
-    hora_coleta = models.TimeField()
-    observacao_coleta = models.TextField(blank=True)
+    # Dados de destino
+    local_destino = models.CharField(max_length=255)
+    endereco_destino = models.CharField(max_length=255)
+    referencia_destino = models.CharField(max_length=255, blank=True)
+    responsavel_destino = models.CharField(max_length=100, blank=True, null=True)
+    telefone_destino = models.CharField(max_length=20)
+    data_destino = models.DateField()
+    hora_destino = models.TimeField()
+    observacao_destino = models.TextField(blank=True)
 
-    # Novos campos adicionados
+    # Dados do equipamento
     numero_transporte = models.CharField(max_length=50)
     motivo = models.CharField(max_length=255, blank=True)
-
     cod_sap = models.CharField(max_length=100)
     alias = models.CharField(max_length=100)
     comprimento = models.FloatField()

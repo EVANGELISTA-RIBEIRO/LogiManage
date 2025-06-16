@@ -9,45 +9,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="{% static 'logimanageapp/css/modal.css' %}">
     <link rel="stylesheet" href="{% static 'logimanageapp/css/requisicao.css' %}">
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}"> {# Adicionado o CSS da sidebar #}
+    <script src="{% static 'logimanageapp/js/modal.js' %}" defer></script>
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo-container">
-                <img class="logo-icon" src="{% static 'logimanageapp/imgs/logo-logimanage-menu.svg' %}" alt="Logo LogiManage">
-                <div class="logo-text">LogiManage</div>
-            </div>
-            
-            <nav class="menu">
-                <a href="inicio.html" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-inicio-menu-preto.svg' %}" alt="Início">
-                    <span>Início</span>
-                </a>
-                <a href="painel.html" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-painel-menu.svg' %}" alt="Painel">
-                    <span>Painel De Controle</span>
-                </a>
-                <a href="requisicao.html" class="menu-item active">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-requisicao-menu-azul.svg' %}" alt="Requisição">
-                    <span>Requisição</span>
-                </a>
-                <a href="formularios.html" class="menu-item">
-                    <img class="menu-icon" src="{% static "logimanageapp/imgs/logo-formulario-menu.svg" %}" alt="Formulários">
-                    <span>Formulários</span>
-                </a>
-                <a href="perfil.html" class="menu-item">
-                    <img class="menu-icon" src="{% static 'logimanageapp/imgs/logo-perfil-menu.svg' %}" alt="Perfil">
-                    <span>Perfil</span>
-                </a>
-            </nav>
-        </div>
+        {% include 'logimanageapp/includes/sidebar.html' %}
 
-        <!-- Main Content -->
         <main class="main-content">
             <div class="page-header">
                 <h1>Requisição de Transporte</h1>
-                <button class="primary-button" id="openModalBtn">
+                <button class="primary-button" id="open-modal">
                     Adicionar Equipamento
                 </button>
             </div>
@@ -111,12 +83,7 @@
         </main>
     </div>
 
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span id="closeModalBtn" class="close">&times;</span>
-    <h2>Adicionar Equipamento</h2>
-  </div>
-</div>
-<script src="{% static 'logimanageapp/js/requisicao.js' %}"></script>
+    {% include 'logimanageapp/includes/modal.html' %}
+
 </body>
 </html>
