@@ -15,13 +15,13 @@
             <span>Início</span>
         </a>
 
-        {# Item de Menu: Painel de Controle #}
+        {% comment %} {# Item de Menu: Painel de Controle #}
         <a href="{% url 'painel' %}" class="menu-item {% if active_page == 'painel' %}active{% endif %}">
             <img class="menu-icon" 
                 src="{% if active_page == 'painel' %}{% static 'logimanageapp/imgs/logo-painel-menu-azul.svg' %}{% else %}{% static 'logimanageapp/imgs/logo-painel-menu.svg' %}{% endif %}" 
                 alt="Painel">
             <span>Painel De Controle</span>
-        </a>
+        </a> {% endcomment %}
 
         {# Item de Menu: Requisição #}
         <a href="{% url 'requisicao' %}" class="menu-item {% if active_page == 'requisicao' %}active{% endif %}">

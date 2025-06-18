@@ -1,0 +1,145 @@
+<div class="transport-table-container">
+    <div class="table-scroll">
+        <table class="transport-table" id="transportTable" data-current-page="1">
+            <thead>
+                <tr>
+                    <th id="col-transporte">Nº Transporte</th>
+                    <th id="col-codigo">Código</th>
+                    <th id="col-equipamento">Equipamento</th>
+                    <th id="col-comprimento">Comprimento</th>
+                    <th id="col-largura">Largura</th>
+                    <th id="col-altura">Altura</th>
+                    <th id="col-peso">Peso</th>
+                    <th id="col-valor">Valor</th>
+                    <th id="col-origem">Origem</th>
+                    <th id="col-endereco-origem">Endereço</th>
+                    <th id="col-responsavel-origem">Responsável</th>
+                    <th id="col-telefone-origem">Tel.</th>
+                    <th id="col-data-origem">Data</th>
+                    <th id="col-hora-origem">Hora</th>
+                    <th id="col-destino">Destino</th>
+                    <th id="col-endereco-destino">Endereço</th>
+                    <th id="col-responsavel-destino">Responsável</th>
+                    <th id="col-telefone-destino">Tel.</th>
+                    <th id="col-data-destino">Data</th>
+                    <th id="col-hora-destino">Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for requisicao in requisicoes %}
+                <tr>
+                    <td class="col-transporte">{{ requisicao.id }}</td>
+                    <td class="col-codigo">{{ requisicao.codigo }}</td>
+                    <td class="col-equipamento">{{ requisicao.equipamento }}</td>
+                    <td class="col-comprimento">{{ requisicao.comprimento }}cm</td>
+                    <td class="col-largura">{{ requisicao.largura }}cm</td>
+                    <td class="col-altura">{{ requisicao.altura }}cm</td>
+                    <td class="col-peso">{{ requisicao.peso }}kg</td>
+                    <td class="col-valor">R$ {{ requisicao.valor|floatformat:2 }}</td>
+                    <td class="col-origem">{{ requisicao.local_origem }}</td>
+                    <td class="col-endereco-origem">{{ requisicao.endereco_origem }}</td>
+                    <td class="col-responsavel-origem">{{ requisicao.responsavel_origem }}</td>
+                    <td class="col-telefone-origem">{{ requisicao.telefone_origem }}</td>
+                    <td class="col-data-origem">{{ requisicao.data_origem|date:"d/m/Y" }}</td>
+                    <td class="col-hora-origem">{{ requisicao.hora_origem|time:"H:i" }}</td>
+                    <td class="col-destino">{{ requisicao.local_destino }}</td>
+                    <td class="col-endereco-destino">{{ requisicao.endereco_destino }}</td>
+                    <td class="col-responsavel-destino">{{ requisicao.responsavel_destino }}</td>
+                    <td class="col-telefone-destino">{{ requisicao.telefone_destino }}</td>
+                    <td class="col-data-destino">{{ requisicao.data_destino|date:"d/m/Y" }}</td>
+                    <td class="col-hora-destino">{{ requisicao.hora_destino|time:"H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="21" style="text-align: center;">Nenhuma requisição encontrada.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <button class="secondary-button" id="prevPage">
+            Anterior
+        </button>
+        <span class="page-info">Página <span id="currentPageNum">1</span></span>
+        <button class="secondary-button" id="nextPage">
+            Próximo
+        </button>
+    </div>
+</div>
+
+<style>
+    /* Esconde as colunas por padrão, serão mostradas via JS */
+    .hidden-column {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('transportTable');
+        const currentPageSpan = document.getElementById('currentPageNum');
+        const prevButton = document.getElementById('prevPage');
+        const nextButton = document.getElementById('nextPage');
+        let currentPage = parseInt(table.dataset.currentPage);
+        const totalPages = 3; // Temos 3 páginas lógicas de colunas
+
+        const columnMap = {
+            1: [
+                'col-transporte', 'col-equipamento', 'col-codigo',
+                'col-comprimento', 'col-largura', 'col-altura', 'col-peso', 'col-valor'
+            ],
+            2: [
+                'col-origem', 'col-endereco-origem', 'col-responsavel-origem',
+                'col-telefone-origem', 'col-data-origem', 'col-hora-origem'
+            ],
+            3: [
+                'col-destino', 'col-endereco-destino', 'col-responsavel-destino',
+                'col-telefone-destino', 'col-data-destino', 'col-hora-destino'
+            ]
+        };
+
+        function showPage(pageNumber) {
+            // Esconde todas as colunas primeiro
+            document.querySelectorAll('#transportTable th').forEach(th => {
+                th.classList.add('hidden-column');
+            });
+            document.querySelectorAll('#transportTable td').forEach(td => {
+                td.classList.add('hidden-column');
+            });
+
+            // Mostra as colunas para a página atual
+            columnMap[pageNumber].forEach(columnClass => {
+                document.getElementById(columnClass).classList.remove('hidden-column');
+                document.querySelectorAll(`.${columnClass}`).forEach(td => {
+                    td.classList.remove('hidden-column');
+                });
+            });
+
+            currentPageSpan.textContent = pageNumber;
+            table.dataset.currentPage = pageNumber;
+
+            // Habilita/desabilita botões
+            prevButton.disabled = (pageNumber === 1);
+            nextButton.disabled = (pageNumber === totalPages);
+        }
+
+        // Exibição inicial
+        showPage(currentPage);
+
+        prevButton.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        nextButton.addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+    });
+</script>

@@ -1,38 +1,27 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from logimanageapp.views import (
-    home_view,
-    login_view,
-    registrar_usuario,
-    registro_view,
-    logar_usuario,
-    requisicao_view,
-    perfil_view,
-    formularios_view,
-    painel_view,
-    RequisicaoViewSet,
-    teste_process_requisition_submission, # Teste function
-    teste_sucesso, # Teste function
-    view_teste, # Teste function
-    process_requisition_submission
-)
+from . import views
+
+
 
 router = DefaultRouter()
-router.register(r'requisicoes', RequisicaoViewSet, basename='requisicao')
+router.register(r'requisicoes', views.RequisicaoViewSet, basename='requisicao')
 
 urlpatterns = [
-    path('', login_view, name='login'),
-    path('logar_usuario/', logar_usuario, name='logar_usuario'),
-    path('registro/', registro_view, name='registro'),
-    path("registrar_usuario/", registrar_usuario, name="registrar_usuario"),
-    path("home/", home_view, name="home"),
-    path("requisicao/", requisicao_view, name="requisicao"),
-    path("perfil/", perfil_view, name="perfil"),
-    path("formularios/", formularios_view, name="formularios"),
-    path("painel/", painel_view, name="painel"),
-    path("teste_view/", view_teste, name="teste_view"),
-    path("teste_process_requisition_submission/", teste_process_requisition_submission, name="teste_processar_requisicao"),
-    path("teste_sucesso/", teste_sucesso, name="teste_sucesso"),
-    path("processar_requisicao/", process_requisition_submission, name="processar_requisicao"),
+    path('', views.login_view, name='login'),
+    path('logar_usuario/', views.logar_usuario, name='logar_usuario'),
+    path('registro/', views.registro_view, name='registro'),
+    path("registrar_usuario/", views.registrar_usuario, name="registrar_usuario"),
+    path("home/", views.home_view, name="home"),
+    path("requisicao/", views.requisicao_view, name="requisicao"),
+    path("perfil/", views.perfil_view, name="perfil"),
+    path("formularios/", views.formularios_view, name="formularios"),
+    path("painel/", views.painel_view, name="painel"),
+    path("teste_view/", views.view_teste, name="teste_view"),
+    path("teste_process_requisition_submission/", views.teste_process_requisition_submission, name="teste_processar_requisicao"),
+    path("teste_sucesso/", views.teste_sucesso, name="teste_sucesso"),
+    path("buscar_equipamento/", views.buscar_equipamento, name="buscar_equipamento"),
+    path("processar_requisicao/", views.process_requisition_submission, name="processar_requisicao"),
     path('api/', include(router.urls)),
+    path('gerar-requisicao-word/', views.gerar_documento_requisicao, name='gerar_requisicao_word'),
 ]

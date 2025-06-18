@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'logimanageapp/css/modal.css' %}">
     <link rel="stylesheet" href="{% static 'logimanageapp/css/requisicao.css' %}">
     <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}"> {# Adicionado o CSS da sidebar #}
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/tabela.css' %}"> {# Adicionado o CSS da tabela #}
     <script src="{% static 'logimanageapp/js/modal.js' %}" defer></script>
 </head>
 <body>
@@ -24,62 +25,8 @@
                 </button>
             </div>
 
-            <div class="transport-table-container">
-                <div class="table-scroll">
-                    <table class="transport-table">
-                        <thead>
-                            <tr>
-                                <th>Nº Equi.</th>
-                                <th>Nome do Equipamento</th>
-                                <th>Cod. (SAP)</th>
-                                <th>Comprimento</th>
-                                <th>Largura</th>
-                                <th>Altura</th>
-                                <th>Largura2</th>
-                                <th>Altura2</th>
-                                <th>Peso</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Equipamento A</td>
-                                <td>SAP001</td>
-                                <td>2,5m</td>
-                                <td>1,2m</td>
-                                <td>1,8m</td>
-                                <td>1,1m</td>
-                                <td>1,7m</td>
-                                <td>150kg</td>
-                                <td>R$ 5.000</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Equipamento B</td>
-                                <td>SAP002</td>
-                                <td>3,0m</td>
-                                <td>1,5m</td>
-                                <td>2,0m</td>
-                                <td>1,4m</td>
-                                <td>1,9m</td>
-                                <td>200kg</td>
-                                <td>R$ 7.500</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            {% include 'logimanageapp/includes/tabela.html' %} {# Tabela de Transporte Movida #}
 
-                <div class="table-footer">
-                    <button class="secondary-button">
-                        Anterior
-                    </button>
-                    <span class="page-info">Página 1</span>
-                    <button class="secondary-button">
-                        Próximo
-                    </button>
-                </div>
-            </div>
         </main>
     </div>
 

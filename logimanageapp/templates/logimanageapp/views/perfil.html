@@ -8,77 +8,48 @@
     <title>LogiManage - Perfil</title>
     <link rel="stylesheet" href="{% static 'logimanageapp/css/perfil.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}"> {# Adicionado o CSS da sidebar #}
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="painel-de-controle">
         {% include 'logimanageapp/includes/sidebar.html' %}
 
-        <!-- Conteúdo Principal -->
         <div class="main-content">
             <div class="profile-container">
                 <div class="profile-header">
                     <h1>Meu Perfil</h1>
                     <div class="date-display">
-                        <!-- Data atualizada manualmente -->
-                        <time datetime="2024-03-28">Terça-feira, 27 de Maio de 2025</time>
+                        <time datetime="{{ 'now'|date:'Y-m-d' }}">{% now "l, d \d\e F \d\e Y" %}</time> 
                     </div>
                 </div>
-                
+
                 <div class="profile-content">
-                    <!-- Seção de Foto do Perfil -->
-                    <div class="profile-picture-section">
-                        <div class="photo-container">
-                            <img src="{% static 'logimanageapp/imgs/imagem-usuario.png' %}" alt="Foto do usuário" class="profile-photo">
-                            <div class="photo-upload">
-                                <label for="photoInput" class="upload-button">
-                                    <i class="fas fa-camera"></i> Alterar Foto
-                                </label>
-                                <input type="file" id="photoInput" accept="image/*" class="file-input">
+                    <form class="profile-form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="profile-image-upload">
+                            <img src="{{ user.profile.image.url }}" alt="Foto de Perfil" class="profile-avatar">
+                            
+                            <label for="id_image" class="upload-button">
+                                <i class="fas fa-camera"></i> Alterar Foto
+                            </label>
+                            
+                            {# NOVO: Renderiza o input normal e o esconde com CSS #}
+                            <div style="display: none;">
+                                {{ form.image }}
                             </div>
+                            
                         </div>
-                        
-                        <div class="user-info">
-                            <h2>Leandro Bezerra</h2>
-                            <p>leandrob@gmail.com</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Formulário de Perfil -->
-                    <form class="profile-form">
+
                         <div class="form-group">
-                            <label for="fullName">Nome Completo</label>
-                            <input type="text" id="fullName" value="Leandro Bezerra">
+                            <label for="username">Nome de Usuário</label>
+                            <input type="text" id="username" value="{{ user.username }}" readonly>
                         </div>
                         
                         <div class="form-group">
-                            <label for="gender">Gênero</label>
-                            <select id="gender">
-                                <option value="masculino">Masculino</option>
-                                <option value="feminino">Feminino</option>
-                                <option value="outro">Outro</option>
-                                <option value="prefiro-nao-dizer">Prefiro não dizer</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="language">Língua</label>
-                            <select id="language">
-                                <option value="portugues">Português</option>
-                                <option value="ingles">Inglês</option>
-                                <option value="espanhol">Espanhol</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="country">País</label>
-                            <select id="country">
-                                <option value="brasil">Brasil</option>
-                                <option value="portugal">Portugal</option>
-                                <option value="eua">Estados Unidos</option>
-                                <option value="espanha">Espanha</option>
-                            </select>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="{{ user.email }}" readonly>
                         </div>
                         
                         <div class="form-actions">
@@ -89,5 +60,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // O ID do input de arquivo do Django é sempre 'id_nome_do_campo'
+            const profileImageInput = document.getElementById('id_image'); 
+            const profileAvatar = document.querySelector('.profile-avatar');
+
+            if (profileImageInput && profileAvatar) {
+                profileImageInput.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            profileAvatar.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

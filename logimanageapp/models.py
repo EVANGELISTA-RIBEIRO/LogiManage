@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Requisicao(models.Model):
     # Dados gerais
@@ -7,10 +10,10 @@ class Requisicao(models.Model):
     toxico = models.BooleanField(default=False)
     refrigerado = models.BooleanField(default=False)
     outro = models.CharField(max_length=255, blank=True)
-    embalada = models.BooleanField()
-    necessita_embalagem = models.BooleanField()
+    embalada = models.BooleanField(default=False)
+    necessita_embalagem = models.BooleanField(default=False)
     tipo_embalagem = models.CharField(max_length=255, blank=True)
-    urgente = models.BooleanField()
+    urgente = models.BooleanField(default=False)
     prazo_maximo = models.DateTimeField()
 
     # Dados de origem
@@ -35,19 +38,44 @@ class Requisicao(models.Model):
 
     # Dados do equipamento
     numero_transporte = models.CharField(max_length=50)
-    motivo = models.CharField(max_length=255, blank=True)
-    cod_sap = models.CharField(max_length=100)
-    alias = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=100)
+    equipamento = models.CharField(max_length=100)
     comprimento = models.FloatField()
     largura = models.FloatField()
     altura = models.FloatField()
     peso = models.FloatField()
     valor = models.FloatField()
-    part_number = models.CharField(max_length=100)
-    serial_number = models.CharField(max_length=100)
 
     class Meta:
         db_table = 'logimanageapp_requisicao'
 
     def __str__(self):
         return f"Requisição #{self.id} - {self.local_origem} para {self.local_coleta}"
+
+
+class Equipamentos(models.Model):
+    nome = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=50, unique=True)
+    valor = models.FloatField()
+
+    class Meta:
+        db_table = 'logimanageapp_equipamentos'
+
+    def __str__(self):
+        return self.nome
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='profile_pics/default.png', upload_to='profile_pics')
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+    
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

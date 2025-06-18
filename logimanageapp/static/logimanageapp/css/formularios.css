@@ -173,6 +173,7 @@ a {
 .formulario-button.abrir {
     background-color: #009ed8;
     color: white;
+    border: none;
 }
 
 .formulario-button.abrir:hover {
