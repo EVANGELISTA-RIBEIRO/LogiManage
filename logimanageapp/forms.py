@@ -2,7 +2,7 @@ from django  import forms
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 
-from logimanageapp.models import Requisicao
+from logimanageapp.models import Profile, Requisicao
 
 class RegistroForm(forms.ModelForm):
     senha = forms.CharField(
@@ -94,6 +94,22 @@ class LoginForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data.get('username')
         return username.strip().replace(' ', '_')
+    
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
+        widgets = {
+            # Removido o atributo 'id' customizado.
+            # Django irá gerar 'id="id_image"' por padrão.
+            'image': forms.FileInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Manter o label vazio para não exibir o texto padrão do Django
+        self.fields['image'].label = ''
 
 # Definição de choices (se já não estiver em models.py ou outro lugar)
 SIM_NAO_CHOICES = [
@@ -115,14 +131,13 @@ class RequisicaoFormEtapa1(forms.ModelForm):
         ]
         widgets = {
             'prazo_maximo': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'input-text'}),
-            'fragil': forms.CheckboxInput(attrs={'class': 'checkbox-input'}), # Se o CSS modal.css usar uma classe para checkboxes
+            'fragil': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
             'liquido': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
             'toxico': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
             'refrigerado': forms.CheckboxInput(attrs={'class': 'checkbox-input'}),
             'embalada': forms.RadioSelect(choices=SIM_NAO_CHOICES),
             'necessita_embalagem': forms.RadioSelect(choices=SIM_NAO_CHOICES),
             'urgente': forms.RadioSelect(choices=SIM_NAO_CHOICES),
-            # Adicionando 'input-text' para campos de texto
             'outro': forms.TextInput(attrs={'class': 'input-text'}),
             'tipo_embalagem': forms.TextInput(attrs={'class': 'input-text'}),
         }
@@ -169,6 +184,7 @@ class RequisicaoFormEtapa2(forms.ModelForm):
         error_messages = {
             'local_origem': {'required': 'Por favor informe o local de origem!'},
             'endereco_origem': {'required': 'Por favor informe o endereço de origem!'},
+            'responsavel_origem': {'required': 'Por favor informe o responsável pela carga!'},
             'telefone_origem': {'required': 'Por favor informe o telefone do responsável pela carga!'},
         }
 
@@ -203,6 +219,7 @@ class RequisicaoFormEtapa3(forms.ModelForm):
         error_messages = {
             'local_destino': {'required': 'Por favor informe o local de destino!'},
             'endereco_destino': {'required': 'Por favor informe o endereço de destino!'},
+            'responsavel_destino': {'required': 'Por favor informe o responsável pela entrega!'},
             'telefone_destino': {'required': 'Por favor informe o telefone do responsável!'},
         }
 
@@ -210,33 +227,36 @@ class RequisicaoFormEtapa4(forms.ModelForm):
     class Meta:
         model = Requisicao
         fields = [
-            'numero_transporte', 'motivo', 'cod_sap', 'alias',
+            'numero_transporte', 'codigo', 'equipamento',
             'comprimento', 'largura', 'altura', 'peso', 'valor',
-            'part_number', 'serial_number'
         ]
         widgets = {
             'numero_transporte': forms.TextInput(attrs={'class': 'input-text'}),
-            'motivo': forms.TextInput(attrs={'class': 'input-text'}),
-            'cod_sap': forms.TextInput(attrs={'class': 'input-text'}),
-            'alias': forms.TextInput(attrs={'class': 'input-text'}),
-            'comprimento': forms.NumberInput(attrs={'class': 'input-text'}), # Assumindo que são campos numéricos
+            'codigo': forms.TextInput(attrs={'class': 'input-text'}),
+            'equipamento': forms.TextInput(attrs={'class': 'input-text', 'readonly': 'readonly'}), # Adicionado readonly
+            'comprimento': forms.NumberInput(attrs={'class': 'input-text'}),
             'largura': forms.NumberInput(attrs={'class': 'input-text'}),
             'altura': forms.NumberInput(attrs={'class': 'input-text'}),
             'peso': forms.NumberInput(attrs={'class': 'input-text'}),
-            'valor': forms.NumberInput(attrs={'class': 'input-text'}),
-            'part_number': forms.TextInput(attrs={'class': 'input-text'}),
-            'serial_number': forms.TextInput(attrs={'class': 'input-text'}),
+            'valor': forms.NumberInput(attrs={'class': 'input-text', 'readonly': 'readonly'}), # Adicionado readonly
         }
         labels = {
             'numero_transporte': 'Nº Transporte',
-            'motivo': 'Motivo',
-            'cod_sap': 'COD (SAP)',
-            'alias': 'Alias',
+            'codigo': 'Código do Equipamento',
+            'equipamento': 'Equipamento',
             'comprimento': 'Comprimento (cm)',
             'largura': 'Largura (cm)',
             'altura': 'Altura (cm)',
             'peso': 'Peso (kg)',
-            'valor': 'Valor',
-            'part_number': 'Part Number',
-            'serial_number': 'Serial Number',
+            'valor': 'Valor (R$)',
+        }
+        error_messages = {
+            'numero_transporte': {'required': 'Por favor informe o número do transporte!'},
+            'codigo': {'required': 'Por favor informe o código do equipamento!'},
+            'equipamento': {'required': 'Por favor informe o equipamento!'},
+            'comprimento': {'required': 'Por favor informe o comprimento!'},
+            'largura': {'required': 'Por favor informe a largura!'},
+            'altura': {'required': 'Por favor informe a altura!'},
+            'peso': {'required': 'Por favor informe o peso!'},
+            'valor': {'required': 'Por favor informe o valor!'},
         }

@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -9,19 +9,17 @@
     <link rel="stylesheet" href="{% static 'logimanageapp/css/formularios.css'%}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}"> <!-- Link para o CSS da sidebar -->
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'logimanageapp/css/modal_forms.css' %}"> {# NOVO: CSS para o modal #}
 </head>
 <body>
     <div class="painel-de-controle">
-        {% include 'logimanageapp/includes/sidebar.html' %} <!-- Incluindo a sidebar -->
+        {% include 'logimanageapp/includes/sidebar.html' %}
 
-        <!-- Conteúdo Principal -->
         <div class="main-content">
             <h1 class="page-title">Formulários</h1>
             
-            <!-- Lista de Formulários -->
             <div class="formularios-container">
-                <!-- Formulário 1 -->
                 <div class="formulario-card">
                     <div class="formulario-header">
                         <div class="formulario-icon">
@@ -33,16 +31,26 @@
                         </div>
                     </div>
                     <div class="formulario-actions">
-                        <a href="#" class="formulario-button abrir">
+                        <button class="formulario-button abrir" id="btn-abrir-requisicao">
                             <i class="fas fa-external-link-alt"></i> Abrir
-                        </a>
-                        <a href="#" class="formulario-button download">
-                            <i class="fas fa-download"></i> Download
+                        </button>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="transportNumberModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Gerar Documento de Requisição</h2>
+            <p>Por favor, insira o Número da Requisição (ID):</p>
+            <input type="number" id="requisicaoIdInput" placeholder="Ex: 123" min="1">
+            <button id="confirmGenerateDoc" class="btn-modal-confirm">Gerar Documento</button>
+            <button id="cancelGenerateDoc" class="btn-modal-cancel">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="{% static 'logimanageapp/js/formularios.js' %}"></script> {# NOVO: Link para o JS #}
 </body>
 </html>

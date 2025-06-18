@@ -1,324 +1,309 @@
-    <div id="fade" class="hide"></div>
+<div id="fade" class="hide"></div>
 
-        <div id="modal" class="hide">
-            <form method="POST" action="{% url 'processar_requisicao' %}">
-                {% csrf_token %} {# Adicione o token CSRF para segurança #}
-            <div id="primeira-pagina">
-                <div class="modal-title">Sobre o Equipamento</div>
-                <div class="progress-container">
-                    <div class="progress-line">
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step"></div>
-                    </div>
+    <div id="modal" class="hide">
+        <form method="POST" action="{% url 'processar_requisicao' %}">
+            {% csrf_token %} {# Adicione o token CSRF para segurança #}
+        <div id="primeira-pagina">
+            <div class="modal-title">Sobre o Equipamento</div>
+            <div class="progress-container">
+                <div class="progress-line">
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step"></div>
                 </div>
-                <div class="question-group">
-                    <div>A carga possui alguma peculiaridade?</div>
-                    <div class="options">
-                        <div class="option">
-                            {{ form1.fragil }}
-                            <label for="{{ form1.fragil.id_for_label }}">Frágil</label>
-                        </div>
-                        <div class="option">
-                            {{ form1.liquido }}
-                            <label for="{{ form1.liquido.id_for_label }}">Líquido</label>
-                        </div>
-                        <div class="option">
-                            {{ form1.refrigerado }}
-                            <label for="{{ form1.refrigerado.id_for_label }}">Refrigerado</label>
-                        </div>
-                        <div class="option">
-                            {{ form1.toxico }}
-                            <label for="{{ form1.toxico.id_for_label }}">Tóxico</label>
-                        </div>
+            </div>
+            <div class="question-group">
+                <div>A carga possui alguma peculiaridade?</div>
+                <div class="options">
+                    <div class="option">
+                        {{ form1.fragil }}
+                        <label for="{{ form1.fragil.id_for_label }}">Frágil</label>
                     </div>
-
-                    <div>
-                        {{ form1.outro.label_tag }}
-                        {{ form1.outro }}
+                    <div class="option">
+                        {{ form1.liquido }}
+                        <label for="{{ form1.liquido.id_for_label }}">Líquido</label>
+                    </div>
+                    <div class="option">
+                        {{ form1.refrigerado }}
+                        <label for="{{ form1.refrigerado.id_for_label }}">Refrigerado</label>
+                    </div>
+                    <div class="option">
+                        {{ form1.toxico }}
+                        <label for="{{ form1.toxico.id_for_label }}">Tóxico</label>
                     </div>
                 </div>
 
-                <div class="question-group">
-                    <div>A carga a ser transportada já está embalada?</div>
-                    <div class="options">
-                        {# Renderiza os radio buttons "embalada" individualmente para melhor controle do layout #}
-                        {% for radio in form1.embalada %}
-                            <div class="option">
-                                {{ radio.tag }}
-                                <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    <div>Será necessário algum tipo de embalagem?</div>
-                    <div class="options">
-                        {# Renderiza os radio buttons "necessita_embalagem" individualmente #}
-                        {% for radio in form1.necessita_embalagem %}
-                            <div class="option">
-                                {{ radio.tag }}
-                                <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
-                            </div>
-                        {% endfor %}
-                    </div>
-
-                    <div>
-                        <div>{{ form1.tipo_embalagem.label_tag }}</div>
-                        {{ form1.tipo_embalagem }}
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    <div>Urgente?</div>
-                    <div class="options">
-                        {# Renderiza os radio buttons "urgente" individualmente para melhor controle do layout #}
-                        {% for radio in form1.urgente %}
-                            <div class="option">
-                                {{ radio.tag }}
-                                <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    
-                    <div>
-                        <div>{{ form1.prazo_maximo.label_tag }}</div>
-                        {{ form1.prazo_maximo }}
-                    </div>
-                </div>
-
-
-
-                <div class="button-group">
-                    <button id="close-modal" class="button cancel">Cancelar</button>
-                    <button class="proximo-modal" id="proximo-1">Próximo</button>
+                <div>
+                    {{ form1.outro.label_tag }}
+                    {{ form1.outro }}
                 </div>
             </div>
 
-            <div class="segunda-pagina hide">
-                <div class="modal-title">Dados Origem</div>
-
-                <div class="progress-container">
-                    <div class="progress-line">
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step"></div>
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    {{ form2.local_origem.label_tag }}
-                    {{ form2.local_origem }}
-                </div>
-
-                <div class="question-group">
-                    {{ form2.endereco_origem.label_tag }}
-                    {{ form2.endereco_origem }}
-                </div>
-
-                <div class="question-group">
-                    {{ form2.referencia_origem.label_tag }}
-                    {{ form2.referencia_origem }}
-                </div>
-
-                <div class="question-group">
-                    {{ form2.responsavel_origem.label_tag }}
-                    {{ form2.responsavel_origem }}
-                </div>
-
-                <div class="question-group">
-                    {{ form2.telefone_origem.label_tag }}
-                    {{ form2.telefone_origem }}
-                </div>
-
-                <div class="question-group" style="display: flex; gap: 15px;">
-                    <div style="flex: 1;">
-                        {{ form2.data_origem.label_tag }}
-                        {{ form2.data_origem }}
-                    </div>
-                    <div style="flex: 1;">
-                        {{ form2.hora_origem.label_tag }}
-                        {{ form2.hora_origem }}
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    {{ form2.observacao_origem.label_tag }}
-                    {{ form2.observacao_origem }}
-                </div>
-
-                
-
-                <div class="button-group">
-                    <button class="button cancel">Cancelar</button>
-                    <div>
-                        <button class="voltar-modal" id="voltar-2">Voltar</button>
-                        <button class="proximo-modal" id="proximo-2">Próximo</button>
-                    </div>
+            <div class="question-group">
+                <div>A carga a ser transportada já está embalada?</div>
+                <div class="options">
+                    {# Renderiza os radio buttons "embalada" individualmente para melhor controle do layout #}
+                    {% for radio in form1.embalada %}
+                        <div class="option">
+                            {{ radio.tag }}
+                            <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
-            <div class="terceira-pagina hide">
-                <div class="modal-title">Dados Destino</div>
-
-                <div class="progress-container">
-                    <div class="progress-line">
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step"></div>
-                    </div>
+            <div class="question-group">
+                <div>Será necessário algum tipo de embalagem?</div>
+                <div class="options">
+                    {# Renderiza os radio buttons "necessita_embalagem" individualmente #}
+                    {% for radio in form1.necessita_embalagem %}
+                        <div class="option">
+                            {{ radio.tag }}
+                            <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                        </div>
+                    {% endfor %}
                 </div>
 
-                <div class="question-group">
-                    {{ form3.local_destino.label_tag }}
-                    {{ form3.local_destino }}
-                </div>
-
-                <div class="question-group">
-                    {{ form3.endereco_destino.label_tag }}
-                    {{ form3.endereco_destino }}
-                </div>
-
-                <div class="question-group">
-                    {{ form3.referencia_destino.label_tag }}
-                    {{ form3.referencia_destino }}
-                </div>
-
-                <div class="question-group">
-                    {{ form3.responsavel_destino.label_tag }}
-                    {{ form3.responsavel_destino }}
-                </div>
-
-                <div class="question-group">
-                    {{ form3.telefone_destino.label_tag }}
-                    {{ form3.telefone_destino }}
-                </div>
-
-                <div class="question-group" style="display: flex; gap: 15px;">
-                    <div style="flex: 1;">
-                        {{ form3.data_destino.label_tag }}
-                        {{ form3.data_destino }}
-                    </div>
-                    <div style="flex: 1;">
-                        {{ form3.hora_destino.label_tag }}
-                        {{ form3.hora_destino }}
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    {{ form3.observacao_destino.label_tag }}
-                    {{ form3.observacao_destino }}
-                </div>
-
-                
-
-                <div class="button-group">
-                    <button class="button cancel">Cancelar</button>
-                    <div>
-                        <button class="voltar-modal" id="voltar-3">Voltar</button>
-                        <button class="proximo-modal" id="proximo-3">Próximo</button>
-                    </div>
+                <div>
+                    <div>{{ form1.tipo_embalagem.label_tag }}</div>
+                    {{ form1.tipo_embalagem }}
                 </div>
             </div>
 
-            <div class="quarta-pagina hide">
-
-                <div class="modal-title">Dados Equipamento</div>
-                <div class="progress-container">
-                    <div class="progress-line">
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step active"></div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step active"></div>
-                    </div>
+            <div class="question-group">
+                <div>Urgente?</div>
+                <div class="options">
+                    {# Renderiza os radio buttons "urgente" individualmente para melhor controle do layout #}
+                    {% for radio in form1.urgente %}
+                        <div class="option">
+                            {{ radio.tag }}
+                            <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                        </div>
+                    {% endfor %}
                 </div>
-
-                <div class="question-group">
-                    {{ form4.numero_transporte.label_tag }}
-                    {{ form4.numero_transporte }}
-                </div>
-
-                <div class="question-group">
-                    {{ form4.motivo.label_tag }}
-                    {{ form4.motivo }}
-                </div>
-
                 
-
-                <div class="equip-quarta-parte">
-                    <div class="question-group">
-                        {{ form4.cod_sap.label_tag }}
-                        {{ form4.cod_sap }}
-                    </div>
-                    <div class="question-group">
-                        {{ form4.alias.label_tag }}
-                        {{ form4.alias }}
-                    </div>
-                </div>
-
-                <div class="equip-quarta-parte">
-                    <div class="question-group">
-                        {{ form4.comprimento.label_tag }}
-                        {{ form4.comprimento }}
-                    </div>
-                    <div class="question-group">
-                        {{ form4.largura.label_tag }}
-                        {{ form4.largura }}
-                    </div>
-                </div>
-
-                <div class="equip-quarta-parte">
-                    <div class="question-group">
-                        {{ form4.altura.label_tag }}
-                        {{ form4.altura }}
-                    </div>
-                    <div class="question-group">
-                        {{ form4.peso.label_tag }}
-                        {{ form4.peso }}
-                    </div>
-                </div>
-
-                <div class="equip-quarta-parte">
-                    <div class="question-group">
-                        {{ form4.valor.label_tag }}
-                        {{ form4.valor }}
-                    </div>
-                    <div class="question-group">
-                        {{ form4.serial_number.label_tag }}
-                        {{ form4.serial_number }}
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    {{ form4.part_number.label_tag }}
-                    {{ form4.part_number }}
-                </div>
-
-                
-
-                <div class="button-group">
-                    <button class="button cancel">Cancelar</button>
-                    <div>
-                        <button class="voltar-modal" id="voltar-4">Voltar</button>
-                        <button id="salvar-modal" type="submit">Salvar</button>
-                    </div>
+                <div>
+                    <div>{{ form1.prazo_maximo.label_tag }}</div>
+                    {{ form1.prazo_maximo }}
                 </div>
             </div>
-            </form>
+
+
+
+            <div class="button-group">
+                <button id="close-modal" class="button cancel">Cancelar</button>
+                <button class="proximo-modal" id="proximo-1">Próximo</button>
+            </div>
         </div>
+
+        <div class="segunda-pagina hide">
+            <div class="modal-title">Dados Origem</div>
+
+            <div class="progress-container">
+                <div class="progress-line">
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step"></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                {{ form2.local_origem.label_tag }}
+                {{ form2.local_origem }}
+            </div>
+
+            <div class="question-group">
+                {{ form2.endereco_origem.label_tag }}
+                {{ form2.endereco_origem }}
+            </div>
+
+            <div class="question-group">
+                {{ form2.referencia_origem.label_tag }}
+                {{ form2.referencia_origem }}
+            </div>
+
+            <div class="question-group">
+                {{ form2.responsavel_origem.label_tag }}
+                {{ form2.responsavel_origem }}
+            </div>
+
+            <div class="question-group">
+                {{ form2.telefone_origem.label_tag }}
+                {{ form2.telefone_origem }}
+            </div>
+
+            <div class="question-group" style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    {{ form2.data_origem.label_tag }}
+                    {{ form2.data_origem }}
+                </div>
+                <div style="flex: 1;">
+                    {{ form2.hora_origem.label_tag }}
+                    {{ form2.hora_origem }}
+                </div>
+            </div>
+
+            <div class="question-group">
+                {{ form2.observacao_origem.label_tag }}
+                {{ form2.observacao_origem }}
+            </div>
+
+            
+
+            <div class="button-group">
+                <button class="button cancel">Cancelar</button>
+                <div>
+                    <button class="voltar-modal" id="voltar-2">Voltar</button>
+                    <button class="proximo-modal" id="proximo-2">Próximo</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="terceira-pagina hide">
+            <div class="modal-title">Dados Destino</div>
+
+            <div class="progress-container">
+                <div class="progress-line">
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step"></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                {{ form3.local_destino.label_tag }}
+                {{ form3.local_destino }}
+            </div>
+
+            <div class="question-group">
+                {{ form3.endereco_destino.label_tag }}
+                {{ form3.endereco_destino }}
+            </div>
+
+            <div class="question-group">
+                {{ form3.referencia_destino.label_tag }}
+                {{ form3.referencia_destino }}
+            </div>
+
+            <div class="question-group">
+                {{ form3.responsavel_destino.label_tag }}
+                {{ form3.responsavel_destino }}
+            </div>
+
+            <div class="question-group">
+                {{ form3.telefone_destino.label_tag }}
+                {{ form3.telefone_destino }}
+            </div>
+
+            <div class="question-group" style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    {{ form3.data_destino.label_tag }}
+                    {{ form3.data_destino }}
+                </div>
+                <div style="flex: 1;">
+                    {{ form3.hora_destino.label_tag }}
+                    {{ form3.hora_destino }}
+                </div>
+            </div>
+
+            <div class="question-group">
+                {{ form3.observacao_destino.label_tag }}
+                {{ form3.observacao_destino }}
+            </div>
+
+            
+
+            <div class="button-group">
+                <button class="button cancel">Cancelar</button>
+                <div>
+                    <button class="voltar-modal" id="voltar-3">Voltar</button>
+                    <button class="proximo-modal" id="proximo-3">Próximo</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="quarta-pagina hide">
+
+            <div class="modal-title">Dados Equipamento</div>
+            <div class="progress-container">
+                <div class="progress-line">
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step active"></div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step active"></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                {{ form4.numero_transporte.label_tag }}
+                {{ form4.numero_transporte }}
+            </div>
+
+            <div class="equip-quarta-parte">
+                <div class="question-group">
+                    {{ form4.codigo.label_tag }}
+                    {# O Django já gera id="id_codigo" para este campo #}
+                    {{ form4.codigo }} 
+                </div>
+                <div class="question-group">
+                    {{ form4.equipamento.label_tag }}
+                    {# Renderiza o campo 'equipamento' manualmente para adicionar o atributo 'readonly' #}
+                    <input type="text" name="{{ form4.equipamento.name }}" id="{{ form4.equipamento.id_for_label }}" value="{{ form4.equipamento.value|default:'' }}" class="input-text" readonly>
+                </div>
+            </div>
+
+            <div class="equip-quarta-parte">
+                <div class="question-group">
+                    {{ form4.comprimento.label_tag }}
+                    {{ form4.comprimento }}
+                </div>
+                <div class="question-group">
+                    {{ form4.largura.label_tag }}
+                    {{ form4.largura }}
+                </div>
+            </div>
+
+            <div class="equip-quarta-parte">
+                <div class="question-group">
+                    {{ form4.altura.label_tag }}
+                    {{ form4.altura }}
+                </div>
+                <div class="question-group">
+                    {{ form4.peso.label_tag }}
+                    {{ form4.peso }}
+                </div>
+            </div>
+
+            <div class="equip-quarta-parte">
+                <div class="question-group">
+                    {{ form4.valor.label_tag }}
+                    {# Renderiza o campo 'valor' manualmente para adicionar o atributo 'readonly' #}
+                    <input type="number" step="0.01" name="{{ form4.valor.name }}" id="{{ form4.valor.id_for_label }}" value="{{ form4.valor.value|default:'' }}" class="input-text" readonly>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="button cancel">Cancelar</button>
+                <div>
+                    <button class="voltar-modal" id="voltar-4">Voltar</button>
+                    <button id="salvar-modal" type="submit">Salvar</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
